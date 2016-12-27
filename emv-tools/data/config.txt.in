@@ -1,0 +1,16 @@
+scard: {
+	driver = "@default_scard@";
+	reader = 0;
+	emu: {
+		file = "@pkgdatadir@/maestro.emu";
+	};
+};
+
+crypto: {
+	driver = "@default_crypto@";
+};
+
+capk: {
+	file  = "@pkgdatadir@/capk.txt";
+	dir = "@pkgdatadir@";
+};

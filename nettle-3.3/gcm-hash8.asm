@@ -1,0 +1,1 @@
+x86_64/gcm-hash8.asm

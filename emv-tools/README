@@ -1,0 +1,5 @@
+autoheader
+autoreconf -vfi
+autoconf
+automake --add-missing
+./configure LIBS=-L/usr/lib64 NETTLE_LIBS=-L/usr/lib64   NETTLE_CFLAGS=/usr/bin
