@@ -1,0 +1,194 @@
+ 
+Wiki Home 
+Browse Pages 
+Browse Labels 
+Formatting Help 
+GPShell       
+Labels:  help (1) howto (1) GPShell (1) console (1) 
+Authors:   Karsten Ohme  
+Attachments 
+GPShell.Console.jpg (73206 bytes) 
+Flattr thisSummary
+Prerequisites
+MacOSX
+Warning
+Usage
+Commands
+Connection Related Commands
+Operation Mode Commands
+Secure Channel Commands
+Install Commands
+Status Commands
+Data Commands
+Key Commands
+APDU Commands
+Options
+Connection Options
+Key Options
+Secure Channel Options
+AID Options
+Install Options
+Status Options
+Data Options
+APDU options
+Samples and Testing Results
+Tested Cards
+About put_sc_key
+About install_for_load and install
+Card Specific Commands and Hints
+CyberFlex cards
+JCOP cards
+Key Derivation
+Security Domain AIDs
+Secure Channel Keys
+Secure Channel Key Versions
+Known bugs
+Debug output
+How to convert a .cap file into a .ijc (.bin) file
+Summary
+GPShell is a script interpreter which talks to a smart card which complies to the [GlobalPlatform Card Specification]. 
+ It is written on top of the [GlobalPlatform Library].
+ It uses the [PC-SC Connection Plugin] for accessing smart cards.
+It can establish a secure channel with a smart card, load, instantiate, delete and list applications on supported smart cards. These applications are practically always JavaCard applets.
+GPShell Console ViewPrerequisites
+To run GPShell you also need the matching GlobalPlatform Library, the [PC-SC Connection Plugin], zlib 1.2.3 and OpenSSL 0.97e or
+ compatible versions. You must place the libraries in the directory where GPShell is called from or in a system directory where libraries are searched (C:\Windows\System32 or/usr/(local/)lib usually). 
+ This is usually automatically the case when you have installed it using a method mentioned under [Installation].
+MacOSX
+For MacOSX you might need to set
+export DYLD_LIBRARY_PATH=/opt/local/lib
+
+so that all needed libraries are found.
+Warning
+PLEASE OBEY THAT EVERY CARD GETS LOCKED AFTER A FEW (USUALLY 10) UNSUCCESSFUL MUTUAL AUTHENTICATIONS.
+ THE CONTENTS OF A LOCKED CARD CANNOT BE MANAGED ANYMORE (DELETED, INSTALLED)!!!
+ IF YOU EXPERIENCE SOME UNSUCCESSFUL MUTUAL AUTHENTICATION ATTEMPS FIRST EXECUTE A SUCCESSFUL MUTUAL AUTHENTICATION WITH A KNOWN WORKING PROGRAM
+ TO RESET THE RETRY COUNTER BEFORE YOU PROCEED WITH GPSHELL. CHECK THE PARAMETERS FOR MUTUAL AUTHENTICATION (KEYS, SECURITY PROTOCOL) AND ASK IF ANYBODY KNOWS IF THE CARD IS SUPPORTED.
+Usage
+There are two operation modes:
+Most commonly used is to supply a script file which is executed by GPShell.
+GPShell can also take a command from the standard input. This way, an application can feed commands to GPShell without creating a script file.
+UNIX like systems:
+gpshell scriptfile
+
+or
+gpshell < scriptfile
+
+Windows:
+GPShell.exe scriptfile
+
+or
+GPShell.exe < scriptfile
+
+There are many script files already shipped with GPShell. So the best is you use a already existing file as a base matching your use case.
+Commands
+Connection Related Commands
+establish_context
+Establish context.
+Before any communication can by done to any card this command must be executed.
+card_connect -reader readerName
+Connect to card in the reader with readerName
+card_connect -readerNumber x
+Connect to card in the xth reader in the system
+select -AID AID
+Select applet instance
+card_disconnect
+Disconnect card
+release_context
+Release context
+Operation Mode Commands
+mode_201
+Sets the protocol mode to OpenPlatform 2.0.1.
+Use this for cards compliant with this specification version. This is the default mode.
+mode_211
+Sets the protocol mode to GlobalPlatform 2.1.1.
+Use this for cards compliant with this specification version. Most cards are using now this specification version.
+enable_trace
+Enable APDU trace
+You will see the sent APDUs in clear text. The last two bytes of the
+ reponse are the response code. A reponse code of 9000 means success,
+ otherwise the response code indicates an error. This may be OK when
+ deleting a non existing applet or package.
+enable_timer
+Enables the logging of the execution time of a command.
+Secure Channel Commands
+open_sc -keyind x -keyver x -key xyz -mac_key xyz -enc_key xyz -kek_key xyz -security x -scp x -scpimpl x -keyDerivation x
+ Open secure channel
+For OpenPlatform 2.0.1' card only -keyind, -keyver, -mac_key and -enc_key are necessary.
+For GlobalPlatform 2.1.1 cards -scp and -scpimpl should be not necessary to supply. It is detected automatically when the mode mode_211 is specified by executing a GET DATA command. (See Data Commands). If you are talking directly to an applet instance which is not Security Domain you have to specify these options, otherwise you get an 6D00: Invalid instruction byte / Command not supported or
+ invalid.
+You must also specify -kek_key.
+ If your card supports a Secure Channel Protocol Implementation with only one base key, specify this key with -key and omit the other keys.
+If you have a card which uses key derivation you must enable the derivation mode with the -keyDerivation option and you must specify with -key the master (mother) key.
+ -kek_key, -mac_key and -enc_key are not relevant, because they are calculated from the master key. See the sections Options and Key Derivation.
+Install Commands
+install -file appletFile -priv privilege -sdAID sdAID -AID AIDInPkg -pkgAID packageAID -instAID instanceAID -nvCodeLimit x -nvDataLimit x
+Load and installs an applet in one step
+The parameters -AID -instAID -pkgAID -nvCodeLimit can be detected automatically and the -AID and -instAID is set to the first applet in appletfile.
+ For the sdAID the AID selected with the select command is chosen if not given. Otherwise the default Card Manager / Security Issuer Domain AID is chosen. So usually you do not have to pass it.
+install_for_load -pkgAID x -sdAID sdAID -nvCodeLimit x
+Install for Load
+For the sdAID the AID selected with the select command is chosen if not given. Otherwise the default Card Manager / Security Issuer Domain AID is chosen. So usually you do not have to pass it.
+ You may need to use this command if the combined install command does not work.
+load -file appletFile
+Load applet
+You may need to use this command if the combined install command does not work.
+install_for_install -priv privilege -AID AIDInPkg -pkgAID packageAID -instAID instanceAID -nvDataLimit x
+Instantiate applet
+You may need to use this command if the combined install command does not work. Or you want to install a preinstalled Security Domain.
+Status Commands
+get_status -element e0
+List applets and packages and security domains
+get_status -element 20
+List packages
+get_status -element 40
+List applets or security domains
+get_status -element 80
+List Card Manager / Security Issuer Domain
+Data Commands
+get_data -identifier identifier
+A GET DATA command returning the data for the given identifier.
+Some common identifiers:
+9F7F - CPLC (card production life cycle) data
+More identifiers are defined in globalplatform.h
+Format of CPLC data 
+You see the command trace of a GET DATA command and the interpreted result.
+=> 80 CA 9F 7F 00 .....
+(12102 usec)
+<= 9F 7F 2A 47 90 50 40 47 91 81 02 31 00 83 58 00 ..*G.P@G...1..X.
+11 68 91 45 81 48 12 83 65 00 00 00 00 01 2F 31 .h.E.H..e...../1
+30 31 31 36 38 00 00 00 00 00 00 00 00 90 00 01168..........
+Status: No Error
+IC Fabricator : 4790
+IC Type : 5040
+Operating System ID : 4791
+Operating System release date : 8102 (11.4.2008)
+Operating System release level : 3100
+IC Fabrication Date : 8358 (23.12.2008)
+IC Serial Number : 00116891
+IC Batch Identifier : 4581
+IC Module Fabricator : 4812
+IC Module Packaging Date : 8365 (30.12.2008)
+ICC Manufacturer : 0000
+IC Embedding Date : 0000
+IC Pre-Personalizer : 012F
+IC Pre-Perso. Equipment Date : 3130 (10.5.2003)
+IC Pre-Perso. Equipment ID : 31313638
+IC Personalizer : 0000
+IC Personalization Date : 0000
+IC Perso. Equipment ID : 00000000
+
+Dates are stored as 2 bytes, the first specifying the year in the decade and the last 3 bytes the day within the year.
+Key Commands
+put_sc_key -keyver 0 -newkeyver 2 -mac_key new_MAC_key -enc_key new_ENC_key -kek_key new_KEK_key -cur_kek current_KEK_key
+Add new key set version 2
+put_sc_key -keyver 1 -newkeyver 1 -mac_key new_MAC_key -enc_key new_ENC_key -kek_key new_KEK_key -cur_kek current_KEK_key
+Replace key set version 1
+put_dm_keys -keyver 0 -newkeyver 2 -file public_rsa_key_file -pass password -key new_receipt_generation_key
+Put delegated management keys for GP 2.1.1 in version 2
+put_dm_keys -keyver 0 -newkeyver 2 -file public_rsa_key_file -pass password -key new_receipt_generation_key -cur_kek current_KEK_key
+Put delegated management keys for OP 2.0.1' in version 2
+APDU Commands
+send_apdu -APDU x
+Send APDU x
+send_apdu -sc 0 -APDU x

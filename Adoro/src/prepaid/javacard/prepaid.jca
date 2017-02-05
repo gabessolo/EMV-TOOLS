@@ -1,0 +1,5600 @@
+// converted by version 1.3
+// on Sun Jan 01 23:39:29 CET 2017
+
+.package prepaid {
+	.aid 0x31:0x50:0x41:0x59:0x2E;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.3;		//javacard/framework
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x2 1.3;		//javacard/security
+		0xA0:0x0:0x0:0x0:0x62:0x2:0x1 1.3;		//javacardx/crypto
+	}
+
+	.applet {
+		0x31:0x50:0x41:0x59:0x2E:0x53:0x59:0x53:0x2E:0x44:0x44:0x46:0x30:0x31 SimpleEMVApplet;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef byte[] EMVProtocolState/volatileState;
+		// 1
+		instanceFieldRef short EMVProtocolState/atc;
+		// 2
+		instanceFieldRef short EMVProtocolState/lastOnlineATC;
+		// 3
+		instanceFieldRef short EMVProtocolState/cumulativeAmount;
+		// 4
+		instanceFieldRef boolean EMVProtocolState/pinValidate;
+		// 5
+		instanceFieldRef short EMVProtocolState/maxAmount;
+		// 6
+		instanceFieldRef short EMVProtocolState/amount;
+		// 7
+		instanceFieldRef byte EMVProtocolState/pinTryLimit;
+		// 8
+		instanceFieldRef SimpleEMVApplet EMVProtocolState/theApplet;
+		// 9
+		instanceFieldRef byte[] EMVProtocolState/cvr;
+		// 10
+		instanceFieldRef short EMVStaticData/theAIP_pse;
+		// 11
+		instanceFieldRef short EMVStaticData/theAIP_maestro;
+		// 12
+		instanceFieldRef byte[] EMVStaticData/theAFL_pse;
+		// 13
+		instanceFieldRef byte[] EMVStaticData/theAFL_maestro;
+		// 14
+		instanceFieldRef byte[] EMVStaticData/PSE;
+		// 15
+		instanceFieldRef byte[] EMVStaticData/AID_MAESTRO;
+		// 16
+		instanceFieldRef byte[] EMVStaticData/fci_pse;
+		// 17
+		instanceFieldRef byte[] EMVStaticData/sfi1_pse;
+		// 18
+		instanceFieldRef byte[] EMVStaticData/record_maestro_ing_tijdelijke_betalpas;
+		// 19
+		instanceFieldRef byte[] EMVStaticData/record_maestro_ing_tijdelijke_betaalpas2;
+		// 20
+		instanceFieldRef byte[] EMVStaticData/record_maestro_ing_tijdelijke_betaalpas3;
+		// 21
+		instanceFieldRef byte[] EMVStaticData/record_maestro_ing_tijdelijke_betaalpas4;
+		// 22
+		instanceFieldRef byte[] EMVStaticData/fci_maestro;
+		// 23
+		instanceFieldRef byte[] EMVStaticData/gpo_maestro;
+		// 24
+		instanceFieldRef byte[] EMVStaticData/sfi1_maestro;
+		// 25
+		instanceFieldRef byte[] EMVStaticData/sfi2_maestro;
+		// 26
+		instanceFieldRef byte[] EMVStaticData/sfi3_maestro;
+		// 27
+		instanceFieldRef byte[] EMVStaticData/sfi4_maestro;
+		// 28
+		instanceFieldRef byte[] EMVStaticData/sfi5_maestro;
+		// 29
+		instanceFieldRef SimpleEMVApplet EMVCrypto/theApplet;
+		// 30
+		instanceFieldRef byte[] EMVCrypto/diversification_data;
+		// 31
+		instanceFieldRef byte[] EMVCrypto/sessionkey;
+		// 32
+		instanceFieldRef byte[] EMVCrypto/transaction_data;
+		// 33
+		instanceFieldRef 3.1 EMVCrypto/desCipher;
+		// 34
+		instanceFieldRef 2.15 EMVCrypto/desMAC;
+		// 35
+		instanceFieldRef 2.10 EMVCrypto/mk;
+		// 36
+		instanceFieldRef 2.10 EMVCrypto/sk;
+		// 37
+		virtualMethodRef 1.10.1()[B;		// getBuffer()[B
+		// 38
+		staticMethodRef 1.16.1([BS[BSS)S;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+		// 39
+		staticMethodRef 1.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 40
+		staticMethodRef EMVProtocolState/increaseATC()V;
+		// 41
+		virtualMethodRef EMVProtocolState/initPinTry()V;
+		// 42
+		staticMethodRef 1.8.13(SB)[B;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+		// 43
+		staticMethodRef 0.0.0()V;		// java/lang/Object.<init>()V
+		// 44
+		staticMethodRef 3.1.0(BZ)Ljavacardx/crypto/Cipher;;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+			.descriptor	Ljavacardx/crypto/Cipher;	3.1;
+
+		// 45
+		virtualMethodRef EMVProtocolState/setFirstACGenerated(B)V;
+		// 46
+		staticMethodRef 2.15.0(BZ)Ljavacard/security/Signature;;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+			.descriptor	Ljavacard/security/Signature;	2.15;
+
+		// 47
+		virtualMethodRef EMVProtocolState/setSecondACGenerated(B)V;
+		// 48
+		staticMethodRef 2.13.0(BSZ)Ljavacard/security/Key;;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 49
+		classRef 2.10;		// javacard/security/DESKey
+		// 50
+		virtualMethodRef EMVProtocolState/setCVMPerformed(B)V;
+		// 51
+		staticMethodRef 1.16.0([BS[BSS)B;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+		// 52
+		staticFieldRef EMVProtocolState SimpleEMVApplet/protocolState;
+		// 53
+		virtualMethodRef EMVProtocolState/getATC()S;
+		// 54
+		staticMethodRef 1.16.6([BSS)S;		// javacard/framework/Util.setShort([BSS)S
+		// 55
+		staticMethodRef 1.16.3([BSSB)S;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+		// 56
+		virtualMethodRef 3.1.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 57
+		virtualMethodRef 3.1.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		// 58
+		staticFieldRef EMVStaticData SimpleEMVApplet/staticData;
+		// 59
+		virtualMethodRef EMVStaticData/getAIP([B)S;
+		// 60
+		virtualMethodRef 2.15.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 61
+		virtualMethodRef 2.15.5([BSS[BS)S;		// sign([BSS[BS)S
+		// 62
+		staticMethodRef EMVCrypto/setSessionKey()V;
+		// 63
+		virtualMethodRef EMVCrypto/generateSecondACReponse(B[BS[BS[BS[B)V;
+		// 64
+		staticMethodRef EMVCrypto/computeAC(B[BS[BS[B)V;
+		// 65
+		staticMethodRef 1.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 66
+		staticFieldRef byte[] SimpleEMVApplet/response;
+		// 67
+		classRef 1.9;		// javacard/framework/OwnerPIN
+		// 68
+		staticMethodRef 1.9.0(BB)V;		// javacard/framework/OwnerPIN.<init>(BB)V
+		// 69
+		staticFieldRef 1.9 SimpleEMVApplet/pin;
+		// 70
+		virtualMethodRef 1.9.8([BSB)V;		// update([BSB)V
+		// 71
+		staticMethodRef 2.14.0(B)Ljavacard/security/RandomData;;		// javacard/security/RandomData.getInstance(B)Ljavacard/security/RandomData;
+			.descriptor	Ljavacard/security/RandomData;	2.14;
+
+		// 72
+		staticFieldRef 2.14 SimpleEMVApplet/randomData;
+		// 73
+		classRef EMVProtocolState;
+		// 74
+		staticMethodRef EMVProtocolState/<init>(Lprepaid/SimpleEMVApplet;)V;
+		// 75
+		classRef EMVStaticData;
+		// 76
+		staticMethodRef EMVStaticData/<init>()V;
+		// 77
+		classRef EMVCrypto;
+		// 78
+		staticMethodRef EMVCrypto/<init>(Lprepaid/SimpleEMVApplet;)V;
+		// 79
+		staticFieldRef EMVCrypto SimpleEMVApplet/theCrypto;
+		// 80
+		staticFieldRef byte[] SimpleEMVApplet/AID_Selected;
+		// 81
+		staticMethodRef 1.16.2([BS[BSS)S;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+		// 82
+		virtualMethodRef EMVProtocolState/startNewSession()V;
+		// 83
+		virtualMethodRef EMVProtocolState/setAppSelected()V;
+		// 84
+		virtualMethodRef 1.10.7()S;		// setOutgoing()S
+		// 85
+		virtualMethodRef EMVStaticData/getFCILength([B)S;
+		// 86
+		virtualMethodRef 1.10.9(S)V;		// setOutgoingLength(S)V
+		// 87
+		virtualMethodRef EMVStaticData/getFCI([B)[B;
+		// 88
+		virtualMethodRef 1.10.5([BSS)V;		// sendBytesLong([BSS)V
+		// 89
+		classRef SimpleEMVApplet;
+		// 90
+		staticMethodRef SimpleEMVApplet/<init>()V;
+		// 91
+		virtualMethodRef 1.3.1()V;		// register()V
+		// 92
+		virtualMethodRef SimpleEMVApplet/Select(Ljavacard/framework/APDU;)Z;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 93
+		staticMethodRef SimpleEMVApplet/getChallenge(Ljavacard/framework/APDU;[B)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 94
+		staticMethodRef SimpleEMVApplet/readRecord(Ljavacard/framework/APDU;[B[B)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 95
+		staticMethodRef SimpleEMVApplet/getProcessingOptions(Ljavacard/framework/APDU;[B[B)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 96
+		staticMethodRef SimpleEMVApplet/getData(Ljavacard/framework/APDU;[B)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 97
+		staticMethodRef SimpleEMVApplet/verify(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 98
+		virtualMethodRef 1.10.6()S;		// setIncomingAndReceive()S
+		// 99
+		virtualMethodRef EMVProtocolState/getFirstACGenerated()B;
+		// 100
+		virtualMethodRef SimpleEMVApplet/generateFirstAC(Ljavacard/framework/APDU;[B[B)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 101
+		virtualMethodRef EMVProtocolState/getSecondACGenerated()B;
+		// 102
+		virtualMethodRef SimpleEMVApplet/generateSecondAC(Ljavacard/framework/APDU;[B[B)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 103
+		virtualMethodRef 1.9.2()B;		// getTriesRemaining()B
+		// 104
+		staticMethodRef 1.16.5(BB)S;		// javacard/framework/Util.makeShort(BB)S
+		// 105
+		virtualMethodRef 1.9.1([BSB)Z;		// check([BSB)Z
+		// 106
+		virtualMethodRef 1.10.8(SS)V;		// setOutgoingAndSend(SS)V
+		// 107
+		virtualMethodRef 2.14.1([BSS)V;		// generateData([BSS)V
+		// 108
+		virtualMethodRef EMVProtocolState/getLastOnlineATC()S;
+		// 109
+		virtualMethodRef EMVStaticData/readRecord(Ljavacard/framework/APDU;[B[B)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 110
+		virtualMethodRef EMVStaticData/getAFL([B)[B;
+		// 111
+		virtualMethodRef EMVProtocolState/setProcPerformed()V;
+		// 112
+		virtualMethodRef EMVStaticData/getCDOL1DataLength()S;
+		// 113
+		virtualMethodRef EMVCrypto/generateFirstACReponse(B[BS[BS[BS[B)V;
+		// 114
+		virtualMethodRef EMVStaticData/getCDOL2DataLength()S;
+	}
+
+	.interface public abstract EMVConstants 0 {
+
+		.superInterfaces {
+			1.0;		// javacard/framework/ISO7816
+		}
+
+		.fields {
+			public static final byte INS_GENERATE_AC = -82;		// B
+			public static final byte INS_GET_DATA = -54;		// B
+			public static final byte INS_GET_PROCESSING_OPTIONS = -88;		// B
+			public static final byte INS_INTERNAL_AUTHENTICATE = -120;		// B
+			public static final byte INS_VERIFY = 32;		// B
+			public static final byte INS_GET_CHALLENGE = -124;		// B
+			public static final byte INS_READ_RECORD = -78;		// B
+			public static final byte INS_GET_SK = -71;		// B
+			public static final byte INS_APPLICATION_BLOCK = 30;		// B
+			public static final byte INS_APPLICATION_UNBLOCK = 24;		// B
+			public static final byte INS_CARD_BLOCK = 22;		// B
+			public static final byte INS_PIN_CHANGE_UNBLOCK = 36;		// B
+			public static final short SW_ISSUER_AUTHENTICATION_FAILED = 25344;		// S
+			public static final byte PERSONALISATION = 0;		// B
+			public static final byte READY = 1;		// B
+			public static final byte BLOCKED = 2;		// B
+			public static final byte ARQC_CODE = -128;		// B
+			public static final byte TC_CODE = 64;		// B
+			public static final byte AAC_CODE = 0;		// B
+			public static final byte RFU_CODE = -64;		// B
+			public static final byte NONE = 0;		// B
+			public static final byte ARQC = 1;		// B
+			public static final byte TC = 2;		// B
+			public static final byte AAC = 3;		// B
+			public static final byte PLAINTEXT_PIN = 1;		// B
+			public static final byte ENCRYPTED_PIN = 2;		// B
+			public static final byte CLS_ISO = 0;		// B
+			public static final byte CLS_MANUFACTURE = -128;		// B
+			public static final byte PIN_TRY_LIMIT = 3;		// B
+			public static final byte PIN_MAX_LEN = 2;		// B
+			public static final byte SEQF_APP_SELECTED = 3;		// B
+			public static final byte SEQF_GETPROC_PERFORMED = 4;		// B
+			public static final byte SEQF_ARQC_GENERATED = 5;		// B
+			public static final byte SEQF_AAC_GENERATED = 6;		// B
+		}
+
+	}
+
+	.interface public abstract EMVTag 1 {
+
+	}
+
+	.class public EMVProtocolState 2 extends 0.0 {		// extends java/lang/Object
+
+		.fields {
+			private SimpleEMVApplet theApplet 0;		// Lprepaid/SimpleEMVApplet;
+			private byte[] volatileState 1;		// [B
+			private byte[] cvr 2;		// [B
+			private short atc 3;		// S
+			private short lastOnlineATC 4;		// S
+			private short cumulativeAmount 5;		// S
+			private boolean pinValidate 6;		// Z
+			private short maxAmount 7;		// S
+			private short amount 8;		// S
+			private byte pinTryLimit 9;		// B
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			getFirstACGenerated()B;
+			setFirstACGenerated(B)V;
+			getSecondACGenerated()B;
+			setSecondACGenerated(B)V;
+			getCVMPerformed()B;
+			setCVMPerformed(B)V;
+			getATC()S;
+			getLastOnlineATC()S;
+			startNewSession()V;
+			onlineSessionCompleted()V;
+			getCVR()[B;
+			setAmount(S)V;
+			getAmount()S;
+			getPINValidate()Z;
+			setPINFailed()V;
+			setPINValidate()V;
+			initPinTry()V;
+			getPinTry()B;
+			incrPinTry()B;
+			setAppSelected()V;
+			getAppSelected()B;
+			setProcPerformed()V;
+			getProcPerformed()B;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 1.0 { 		// javacard/framework/ISO7816
+			}
+
+			.interface EMVConstants { 
+			}
+
+		}
+
+		.method public getFirstACGenerated()B 1 {
+			.stack 2;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_1;
+					baload;
+					sreturn;
+		}
+
+		.method public setFirstACGenerated(B)V 2 {
+			.stack 3;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_1;
+					sload_1;
+					bastore;
+					return;
+		}
+
+		.method public getSecondACGenerated()B 3 {
+			.stack 2;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_2;
+					baload;
+					sreturn;
+		}
+
+		.method public setSecondACGenerated(B)V 4 {
+			.stack 3;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_2;
+					sload_1;
+					bastore;
+					return;
+		}
+
+		.method public getCVMPerformed()B 5 {
+			.stack 2;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_0;
+					baload;
+					sreturn;
+		}
+
+		.method public setCVMPerformed(B)V 6 {
+			.stack 3;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_0;
+					sload_1;
+					bastore;
+					return;
+		}
+
+		.method public getATC()S 7 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_s_this 1;		// short prepaid/EMVProtocolState.atc
+					sreturn;
+		}
+
+		.method private increaseATC()V {
+			.stack 3;
+			.locals 0;
+
+				L0:	aload_0;
+					getfield_s_this 1;		// short prepaid/EMVProtocolState.atc
+					sconst_1;
+					sadd;
+					putfield_s 1;		// short prepaid/EMVProtocolState.atc
+					return;
+		}
+
+		.method public getLastOnlineATC()S 8 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_s_this 2;		// short prepaid/EMVProtocolState.lastOnlineATC
+					sreturn;
+		}
+
+		.method public <init>(Lprepaid/SimpleEMVApplet;)V 0 {
+			.stack 3;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 43;		// java/lang/Object.<init>()V
+					aload_0;
+					sconst_0;
+					putfield_s 1;		// short prepaid/EMVProtocolState.atc
+					aload_0;
+					sconst_0;
+					putfield_s 2;		// short prepaid/EMVProtocolState.lastOnlineATC
+					aload_0;
+					sconst_0;
+					putfield_s 3;		// short prepaid/EMVProtocolState.cumulativeAmount
+					aload_0;
+					sconst_0;
+					putfield_b 4;		// boolean prepaid/EMVProtocolState.pinValidate
+					aload_0;
+					sconst_0;
+					putfield_s 5;		// short prepaid/EMVProtocolState.maxAmount
+					aload_0;
+					sconst_0;
+					putfield_s 6;		// short prepaid/EMVProtocolState.amount
+					aload_0;
+					sconst_0;
+					putfield_b 7;		// byte prepaid/EMVProtocolState.pinTryLimit
+					aload_0;
+					aload_1;
+					putfield_a 8;		// reference prepaid/EMVProtocolState.theApplet
+					aload_0;
+					bspush 7;
+					sconst_2;
+					invokestatic 42;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 0;		// reference prepaid/EMVProtocolState.volatileState
+					aload_0;
+					sconst_2;
+					sconst_2;
+					invokestatic 42;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 9;		// reference prepaid/EMVProtocolState.cvr
+					return;
+		}
+
+		.method public startNewSession()V 9 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sconst_0;
+					invokevirtual 45;		// setFirstACGenerated(B)V
+					aload_0;
+					sconst_0;
+					invokevirtual 47;		// setSecondACGenerated(B)V
+					aload_0;
+					sconst_0;
+					invokevirtual 50;		// setCVMPerformed(B)V
+					aload_0;
+					invokespecial 40;		// prepaid/EMVProtocolState.increaseATC()V
+					aload_0;
+					invokevirtual 41;		// initPinTry()V
+					return;
+		}
+
+		.method public onlineSessionCompleted()V 10 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					getfield_s_this 1;		// short prepaid/EMVProtocolState.atc
+					putfield_s 2;		// short prepaid/EMVProtocolState.lastOnlineATC
+					return;
+		}
+
+		.method public getCVR()[B 11 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aconst_null;
+					areturn;
+		}
+
+		.method public setAmount(S)V 12 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sload_1;
+					putfield_s 6;		// short prepaid/EMVProtocolState.amount
+					return;
+		}
+
+		.method public getAmount()S 13 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_s_this 6;		// short prepaid/EMVProtocolState.amount
+					sreturn;
+		}
+
+		.method public getPINValidate()Z 14 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_b_this 4;		// boolean prepaid/EMVProtocolState.pinValidate
+					sreturn;
+		}
+
+		.method public setPINFailed()V 15 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sconst_0;
+					putfield_b 4;		// boolean prepaid/EMVProtocolState.pinValidate
+					return;
+		}
+
+		.method public setPINValidate()V 16 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sconst_1;
+					putfield_b 4;		// boolean prepaid/EMVProtocolState.pinValidate
+					return;
+		}
+
+		.method public initPinTry()V 17 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sconst_0;
+					putfield_b 7;		// byte prepaid/EMVProtocolState.pinTryLimit
+					return;
+		}
+
+		.method public getPinTry()B 18 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_b_this 7;		// byte prepaid/EMVProtocolState.pinTryLimit
+					sreturn;
+		}
+
+		.method public incrPinTry()B 19 {
+			.stack 4;
+			.locals 0;
+
+				L0:	aload_0;
+					dup;
+					getfield_b 7;		// byte prepaid/EMVProtocolState.pinTryLimit
+					dup_x 18;
+					sconst_1;
+					sadd;
+					s2b;
+					putfield_b 7;		// byte prepaid/EMVProtocolState.pinTryLimit
+					sreturn;
+		}
+
+		.method public setAppSelected()V 20 {
+			.stack 3;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_3;
+					sconst_1;
+					bastore;
+					return;
+		}
+
+		.method public getAppSelected()B 21 {
+			.stack 2;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_3;
+					baload;
+					sreturn;
+		}
+
+		.method public setProcPerformed()V 22 {
+			.stack 3;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_4;
+					sconst_1;
+					bastore;
+					return;
+		}
+
+		.method public getProcPerformed()B 23 {
+			.stack 2;
+			.locals 0;
+
+				L0:	getfield_a_this 0;		// reference prepaid/EMVProtocolState.volatileState
+					sconst_4;
+					baload;
+					sreturn;
+		}
+
+	}
+
+	.class public EMVStaticData 3 extends 0.0 {		// extends java/lang/Object
+
+		.fields {
+			private final byte[] theAFL_pse 0;		// [B
+			private final byte[] theAFL_maestro 1;		// [B
+			 byte[] PSE 2;		// [B
+			 byte[] AID_MAESTRO 3;		// [B
+			private final byte[] fci_pse 4;		// [B
+			private final byte[] sfi1_pse 5;		// [B
+			private final byte[] record_maestro_ing_tijdelijke_betalpas 6;		// [B
+			private final byte[] record_maestro_ing_tijdelijke_betaalpas2 7;		// [B
+			private final byte[] record_maestro_ing_tijdelijke_betaalpas3 8;		// [B
+			private final byte[] record_maestro_ing_tijdelijke_betaalpas4 9;		// [B
+			private final byte[] fci_maestro 10;		// [B
+			private final byte[] gpo_maestro 11;		// [B
+			private final byte[] sfi1_maestro 12;		// [B
+			private final byte[] sfi2_maestro 13;		// [B
+			private final byte[] sfi3_maestro 14;		// [B
+			private final byte[] sfi4_maestro 15;		// [B
+			private final byte[] sfi5_maestro 16;		// [B
+			private final short theAIP_pse 17;		// S
+			private final short theAIP_maestro 18;		// S
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			getAFL([B)[B;
+			getAIP([B)S;
+			getCDOL1DataLength()S;
+			getCDOL2DataLength()S;
+			getFCI([B)[B;
+			getFCILength([B)S;
+			readRecord(Ljavacard/framework/APDU;[B[B)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 1.0 { 		// javacard/framework/ISO7816
+			}
+
+			.interface EMVConstants { 
+			}
+
+		}
+
+		.method public <init>()V 0 {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 43;		// java/lang/Object.<init>()V
+					aload_0;
+					sspush 14336;
+					putfield_s 10;		// short prepaid/EMVStaticData.theAIP_pse
+					aload_0;
+					sspush 14336;
+					putfield_s 11;		// short prepaid/EMVStaticData.theAIP_maestro
+					aload_0;
+					sconst_4;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 8;
+					bastore;
+					dup;
+					sconst_1;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_2;
+					sconst_1;
+					bastore;
+					putfield_a 12;		// reference prepaid/EMVStaticData.theAFL_pse
+					aload_0;
+					bspush 8;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 8;
+					bastore;
+					dup;
+					sconst_1;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_2;
+					sconst_5;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 16;
+					bastore;
+					dup;
+					sconst_5;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 6;
+					sconst_2;
+					bastore;
+					dup;
+					bspush 7;
+					sconst_1;
+					bastore;
+					putfield_a 13;		// reference prepaid/EMVStaticData.theAFL_maestro
+					aload_0;
+					bspush 14;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 49;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 80;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 65;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 89;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 46;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 83;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 89;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 83;
+					bastore;
+					dup;
+					bspush 8;
+					bspush 46;
+					bastore;
+					dup;
+					bspush 9;
+					bspush 68;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 68;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 70;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 49;
+					bastore;
+					putfield_a 14;		// reference prepaid/EMVStaticData.PSE
+					aload_0;
+					bspush 7;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush -96;
+					bastore;
+					dup;
+					sconst_4;
+					sconst_4;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 96;
+					bastore;
+					putfield_a 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					aload_0;
+					bspush 34;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 111;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 32;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -124;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 14;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 49;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 65;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 89;
+					bastore;
+					dup;
+					bspush 8;
+					bspush 46;
+					bastore;
+					dup;
+					bspush 9;
+					bspush 83;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 89;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 83;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 46;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 68;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 68;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 70;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 18;
+					bspush -91;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 14;
+					bastore;
+					dup;
+					bspush 20;
+					bspush -120;
+					bastore;
+					dup;
+					bspush 21;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 22;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 95;
+					bastore;
+					dup;
+					bspush 24;
+					bspush 45;
+					bastore;
+					dup;
+					bspush 25;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 28;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 29;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 30;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 31;
+					bspush 17;
+					bastore;
+					dup;
+					bspush 32;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 33;
+					sconst_1;
+					bastore;
+					putfield_a 16;		// reference prepaid/EMVStaticData.fci_pse
+					aload_0;
+					bspush 32;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 30;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 97;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 28;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 79;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 6;
+					bspush -96;
+					bastore;
+					dup;
+					bspush 10;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 96;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 115;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 20;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 21;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 22;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 18;
+					bastore;
+					dup;
+					bspush 24;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 25;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 28;
+					bspush 115;
+					bastore;
+					dup;
+					bspush 29;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 30;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 31;
+					bspush 111;
+					bastore;
+					putfield_a 17;		// reference prepaid/EMVStaticData.sfi1_pse
+					aload_0;
+					bspush 88;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 86;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -112;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 84;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 18;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 9;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 106;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 26;
+					bastore;
+					dup;
+					bspush 8;
+					bspush -121;
+					bastore;
+					dup;
+					bspush 9;
+					bspush -91;
+					bastore;
+					dup;
+					bspush 10;
+					bspush -12;
+					bastore;
+					dup;
+					bspush 11;
+					bspush -32;
+					bastore;
+					dup;
+					bspush 12;
+					bspush -43;
+					bastore;
+					dup;
+					bspush 13;
+					bspush -126;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 112;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 17;
+					bastore;
+					dup;
+					bspush 16;
+					bspush -5;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 23;
+					bastore;
+					dup;
+					bspush 18;
+					bspush -23;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 122;
+					bastore;
+					dup;
+					bspush 20;
+					bspush 120;
+					bastore;
+					dup;
+					bspush 21;
+					bspush 56;
+					bastore;
+					dup;
+					bspush 22;
+					bspush 53;
+					bastore;
+					dup;
+					bspush 23;
+					bspush -68;
+					bastore;
+					dup;
+					bspush 24;
+					bspush 121;
+					bastore;
+					dup;
+					bspush 25;
+					bspush -64;
+					bastore;
+					dup;
+					bspush 26;
+					bspush -17;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 87;
+					bastore;
+					dup;
+					bspush 28;
+					bspush -54;
+					bastore;
+					dup;
+					bspush 29;
+					bspush -68;
+					bastore;
+					dup;
+					bspush 30;
+					bspush 33;
+					bastore;
+					dup;
+					bspush 31;
+					bspush -105;
+					bastore;
+					dup;
+					bspush 32;
+					bspush 123;
+					bastore;
+					dup;
+					bspush 33;
+					bspush -47;
+					bastore;
+					dup;
+					bspush 34;
+					bspush -19;
+					bastore;
+					dup;
+					bspush 35;
+					bspush -20;
+					bastore;
+					dup;
+					bspush 36;
+					bspush -61;
+					bastore;
+					dup;
+					bspush 37;
+					bspush 14;
+					bastore;
+					dup;
+					bspush 38;
+					bspush 81;
+					bastore;
+					dup;
+					bspush 39;
+					bspush -76;
+					bastore;
+					dup;
+					bspush 40;
+					bspush 20;
+					bastore;
+					dup;
+					bspush 41;
+					bspush -60;
+					bastore;
+					dup;
+					bspush 42;
+					bspush -61;
+					bastore;
+					dup;
+					bspush 43;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 44;
+					bspush -55;
+					bastore;
+					dup;
+					bspush 45;
+					bspush 55;
+					bastore;
+					dup;
+					bspush 46;
+					bspush -65;
+					bastore;
+					dup;
+					bspush 47;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 48;
+					bspush -122;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 78;
+					bastore;
+					dup;
+					bspush 50;
+					bspush -20;
+					bastore;
+					dup;
+					bspush 51;
+					bspush 61;
+					bastore;
+					dup;
+					bspush 52;
+					bspush -47;
+					bastore;
+					dup;
+					bspush 53;
+					bspush 16;
+					bastore;
+					dup;
+					bspush 54;
+					bspush 57;
+					bastore;
+					dup;
+					bspush 55;
+					bspush -109;
+					bastore;
+					dup;
+					bspush 56;
+					bspush 53;
+					bastore;
+					dup;
+					bspush 57;
+					bspush 105;
+					bastore;
+					dup;
+					bspush 58;
+					bspush -106;
+					bastore;
+					dup;
+					bspush 59;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 60;
+					bspush -63;
+					bastore;
+					dup;
+					bspush 61;
+					bspush -112;
+					bastore;
+					dup;
+					bspush 62;
+					bspush 58;
+					bastore;
+					dup;
+					bspush 63;
+					bspush -76;
+					bastore;
+					dup;
+					bspush 64;
+					bspush -6;
+					bastore;
+					dup;
+					bspush 65;
+					bspush -94;
+					bastore;
+					dup;
+					bspush 66;
+					bspush 93;
+					bastore;
+					dup;
+					bspush 67;
+					bspush 91;
+					bastore;
+					dup;
+					bspush 68;
+					bspush 99;
+					bastore;
+					dup;
+					bspush 69;
+					bspush -6;
+					bastore;
+					dup;
+					bspush 70;
+					bspush 66;
+					bastore;
+					dup;
+					bspush 71;
+					bspush 84;
+					bastore;
+					dup;
+					bspush 72;
+					bspush -36;
+					bastore;
+					dup;
+					bspush 73;
+					bspush -15;
+					bastore;
+					dup;
+					bspush 74;
+					bspush -90;
+					bastore;
+					dup;
+					bspush 75;
+					bspush -106;
+					bastore;
+					dup;
+					bspush 76;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 77;
+					bspush -40;
+					bastore;
+					dup;
+					bspush 78;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 79;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 80;
+					bspush 123;
+					bastore;
+					dup;
+					bspush 81;
+					bspush 29;
+					bastore;
+					dup;
+					bspush 82;
+					bspush 105;
+					bastore;
+					dup;
+					bspush 83;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 84;
+					bspush -108;
+					bastore;
+					dup;
+					bspush 85;
+					bspush 84;
+					bastore;
+					dup;
+					bspush 86;
+					bspush -20;
+					bastore;
+					dup;
+					bspush 87;
+					bspush 116;
+					bastore;
+					putfield_a 18;		// reference prepaid/EMVStaticData.record_maestro_ing_tijdelijke_betalpas
+					aload_0;
+					bspush 103;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 101;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -113;
+					bastore;
+					dup;
+					sconst_3;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_4;
+					sconst_5;
+					bastore;
+					dup;
+					sconst_5;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 50;
+					bastore;
+					dup;
+					bspush 7;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 8;
+					sconst_3;
+					bastore;
+					dup;
+					bspush 9;
+					bspush -110;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 92;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 8;
+					bastore;
+					dup;
+					bspush 12;
+					bspush -47;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 11;
+					bastore;
+					dup;
+					bspush 14;
+					bspush -28;
+					bastore;
+					dup;
+					bspush 15;
+					bspush -72;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 24;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 109;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 94;
+					bastore;
+					dup;
+					bspush 20;
+					bspush 29;
+					bastore;
+					dup;
+					bspush 21;
+					bspush 63;
+					bastore;
+					dup;
+					bspush 22;
+					bspush -42;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 24;
+					bspush -91;
+					bastore;
+					dup;
+					bspush 25;
+					bspush 68;
+					bastore;
+					dup;
+					bspush 26;
+					bspush -84;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 100;
+					bastore;
+					dup;
+					bspush 28;
+					bspush -103;
+					bastore;
+					dup;
+					bspush 29;
+					bspush -6;
+					bastore;
+					dup;
+					bspush 30;
+					bspush -110;
+					bastore;
+					dup;
+					bspush 31;
+					bspush 90;
+					bastore;
+					dup;
+					bspush 32;
+					bspush -82;
+					bastore;
+					dup;
+					bspush 33;
+					bspush 73;
+					bastore;
+					dup;
+					bspush 34;
+					bspush 45;
+					bastore;
+					dup;
+					bspush 35;
+					bspush -16;
+					bastore;
+					dup;
+					bspush 36;
+					bspush -89;
+					bastore;
+					dup;
+					bspush 37;
+					bspush -63;
+					bastore;
+					dup;
+					bspush 38;
+					bspush -87;
+					bastore;
+					dup;
+					bspush 39;
+					bspush -47;
+					bastore;
+					dup;
+					bspush 40;
+					bspush -85;
+					bastore;
+					dup;
+					bspush 41;
+					bspush -99;
+					bastore;
+					dup;
+					bspush 42;
+					bspush -78;
+					bastore;
+					dup;
+					bspush 43;
+					bspush -103;
+					bastore;
+					dup;
+					bspush 44;
+					bspush 87;
+					bastore;
+					dup;
+					bspush 45;
+					bspush 22;
+					bastore;
+					dup;
+					bspush 46;
+					bspush 115;
+					bastore;
+					dup;
+					bspush 47;
+					bspush -89;
+					bastore;
+					dup;
+					bspush 48;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 62;
+					bastore;
+					dup;
+					bspush 50;
+					bspush 38;
+					bastore;
+					dup;
+					bspush 51;
+					bspush -70;
+					bastore;
+					dup;
+					bspush 52;
+					bspush -70;
+					bastore;
+					dup;
+					bspush 53;
+					bspush -22;
+					bastore;
+					dup;
+					bspush 54;
+					bspush 8;
+					bastore;
+					dup;
+					bspush 55;
+					bspush 23;
+					bastore;
+					dup;
+					bspush 56;
+					bspush -100;
+					bastore;
+					dup;
+					bspush 57;
+					bspush -57;
+					bastore;
+					dup;
+					bspush 58;
+					bspush 21;
+					bastore;
+					dup;
+					bspush 59;
+					bspush -123;
+					bastore;
+					dup;
+					bspush 60;
+					bspush -99;
+					bastore;
+					dup;
+					bspush 61;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 62;
+					bspush 28;
+					bastore;
+					dup;
+					bspush 63;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 64;
+					bspush -8;
+					bastore;
+					dup;
+					bspush 65;
+					bspush -15;
+					bastore;
+					dup;
+					bspush 66;
+					bspush -40;
+					bastore;
+					dup;
+					bspush 67;
+					bspush 74;
+					bastore;
+					dup;
+					bspush 68;
+					bspush -100;
+					bastore;
+					dup;
+					bspush 69;
+					bspush -98;
+					bastore;
+					dup;
+					bspush 70;
+					bspush -5;
+					bastore;
+					dup;
+					bspush 71;
+					bspush 58;
+					bastore;
+					dup;
+					bspush 72;
+					bspush -62;
+					bastore;
+					dup;
+					bspush 73;
+					bspush 94;
+					bastore;
+					dup;
+					bspush 74;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 75;
+					bspush 45;
+					bastore;
+					dup;
+					bspush 76;
+					bspush 6;
+					bastore;
+					dup;
+					bspush 77;
+					bspush 126;
+					bastore;
+					dup;
+					bspush 78;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 79;
+					bspush 62;
+					bastore;
+					dup;
+					bspush 80;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 81;
+					bspush 64;
+					bastore;
+					dup;
+					bspush 82;
+					bspush 44;
+					bastore;
+					dup;
+					bspush 83;
+					bspush 95;
+					bastore;
+					dup;
+					bspush 84;
+					bspush -37;
+					bastore;
+					dup;
+					bspush 85;
+					bspush -89;
+					bastore;
+					dup;
+					bspush 86;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 87;
+					bspush 9;
+					bastore;
+					dup;
+					bspush 88;
+					bspush -92;
+					bastore;
+					dup;
+					bspush 89;
+					bspush 64;
+					bastore;
+					dup;
+					bspush 90;
+					bspush -102;
+					bastore;
+					dup;
+					bspush 91;
+					bspush -21;
+					bastore;
+					dup;
+					bspush 92;
+					bspush -39;
+					bastore;
+					dup;
+					bspush 93;
+					bspush -80;
+					bastore;
+					dup;
+					bspush 94;
+					bspush 66;
+					bastore;
+					dup;
+					bspush 95;
+					bspush 46;
+					bastore;
+					dup;
+					bspush 96;
+					sconst_m1;
+					bastore;
+					dup;
+					bspush 97;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 98;
+					bspush -117;
+					bastore;
+					dup;
+					bspush 99;
+					bspush 12;
+					bastore;
+					dup;
+					bspush 100;
+					bspush -123;
+					bastore;
+					dup;
+					bspush 101;
+					bspush -108;
+					bastore;
+					dup;
+					bspush 102;
+					bspush -79;
+					bastore;
+					putfield_a 19;		// reference prepaid/EMVStaticData.record_maestro_ing_tijdelijke_betaalpas2
+					aload_0;
+					bspush 80;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 78;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 97;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 21;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 79;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 6;
+					bspush -96;
+					bastore;
+					dup;
+					bspush 10;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 96;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 65;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 69;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 83;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 84;
+					bastore;
+					dup;
+					bspush 20;
+					bspush 82;
+					bastore;
+					dup;
+					bspush 21;
+					bspush 79;
+					bastore;
+					dup;
+					bspush 22;
+					bspush -121;
+					bastore;
+					dup;
+					bspush 23;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 24;
+					sconst_2;
+					bastore;
+					dup;
+					bspush 25;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 29;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 79;
+					bastore;
+					dup;
+					bspush 28;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 29;
+					bspush -96;
+					bastore;
+					dup;
+					bspush 33;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 34;
+					bspush -128;
+					bastore;
+					dup;
+					bspush 35;
+					sconst_2;
+					bastore;
+					dup;
+					bspush 36;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 37;
+					bspush 15;
+					bastore;
+					dup;
+					bspush 38;
+					bspush 83;
+					bastore;
+					dup;
+					bspush 39;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 40;
+					bspush 99;
+					bastore;
+					dup;
+					bspush 41;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 42;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 43;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 44;
+					bspush 67;
+					bastore;
+					dup;
+					bspush 45;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 46;
+					bspush 100;
+					bastore;
+					dup;
+					bspush 47;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 48;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 65;
+					bastore;
+					dup;
+					bspush 50;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 51;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 52;
+					bspush 104;
+					bastore;
+					dup;
+					bspush 53;
+					bspush -121;
+					bastore;
+					dup;
+					bspush 54;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 56;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 57;
+					bspush 22;
+					bastore;
+					dup;
+					bspush 58;
+					bspush 79;
+					bastore;
+					dup;
+					bspush 59;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 60;
+					bspush -96;
+					bastore;
+					dup;
+					bspush 63;
+					sconst_3;
+					bastore;
+					dup;
+					bspush 64;
+					bspush 21;
+					bastore;
+					dup;
+					bspush 65;
+					bspush 96;
+					bastore;
+					dup;
+					bspush 66;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 67;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 68;
+					bspush 8;
+					bastore;
+					dup;
+					bspush 69;
+					bspush 67;
+					bastore;
+					dup;
+					bspush 70;
+					bspush 104;
+					bastore;
+					dup;
+					bspush 71;
+					bspush 105;
+					bastore;
+					dup;
+					bspush 72;
+					bspush 112;
+					bastore;
+					dup;
+					bspush 73;
+					bspush 107;
+					bastore;
+					dup;
+					bspush 74;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 75;
+					bspush 105;
+					bastore;
+					dup;
+					bspush 76;
+					bspush 112;
+					bastore;
+					dup;
+					bspush 77;
+					bspush -121;
+					bastore;
+					dup;
+					bspush 78;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 79;
+					sconst_1;
+					bastore;
+					putfield_a 20;		// reference prepaid/EMVStaticData.record_maestro_ing_tijdelijke_betaalpas3
+					aload_0;
+					bspush 16;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush -32;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 97;
+					bastore;
+					dup;
+					sconst_3;
+					bspush -64;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 95;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 9;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 8;
+					bspush 50;
+					bastore;
+					dup;
+					bspush 9;
+					bspush 55;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 46;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 46;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 46;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 49;
+					bastore;
+					putfield_a 21;		// reference prepaid/EMVStaticData.record_maestro_ing_tijdelijke_betaalpas4
+					aload_0;
+					bspush 51;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 111;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 49;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -124;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 7;
+					bastore;
+					dup;
+					sconst_4;
+					bspush -96;
+					bastore;
+					dup;
+					bspush 8;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 9;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 96;
+					bastore;
+					dup;
+					bspush 11;
+					bspush -91;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 38;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 115;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 20;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 21;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 22;
+					bspush 95;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 45;
+					bastore;
+					dup;
+					bspush 24;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 25;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 28;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 29;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 30;
+					bspush 17;
+					bastore;
+					dup;
+					bspush 31;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 32;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 33;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 34;
+					bspush 18;
+					bastore;
+					dup;
+					bspush 35;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 36;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 37;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 38;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 39;
+					bspush 115;
+					bastore;
+					dup;
+					bspush 40;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 41;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 42;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 43;
+					bspush -65;
+					bastore;
+					dup;
+					bspush 44;
+					bspush 12;
+					bastore;
+					dup;
+					bspush 45;
+					sconst_5;
+					bastore;
+					dup;
+					bspush 46;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 47;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 48;
+					sconst_2;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 11;
+					bastore;
+					dup;
+					bspush 50;
+					bspush 10;
+					bastore;
+					putfield_a 22;		// reference prepaid/EMVStaticData.fci_maestro
+					aload_0;
+					sconst_0;
+					newarray 11;
+					putfield_a 23;		// reference prepaid/EMVStaticData.gpo_maestro
+					aload_0;
+					bspush 67;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 65;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 87;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 18;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 103;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 6;
+					bspush -106;
+					bastore;
+					dup;
+					bspush 8;
+					sconst_2;
+					bastore;
+					dup;
+					bspush 9;
+					bspush -108;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 52;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 20;
+					bastore;
+					dup;
+					bspush 13;
+					bspush -47;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 18;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 38;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 24;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 112;
+					bastore;
+					dup;
+					bspush 20;
+					bspush 121;
+					bastore;
+					dup;
+					bspush 21;
+					bspush 103;
+					bastore;
+					dup;
+					bspush 22;
+					bspush 95;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 24;
+					bspush 26;
+					bastore;
+					dup;
+					bspush 25;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 79;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 28;
+					bspush 69;
+					bastore;
+					dup;
+					bspush 29;
+					bspush 78;
+					bastore;
+					dup;
+					bspush 30;
+					bspush 84;
+					bastore;
+					dup;
+					bspush 31;
+					bspush 85;
+					bastore;
+					dup;
+					bspush 32;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 33;
+					bspush 47;
+					bastore;
+					dup;
+					bspush 34;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 35;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 36;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 37;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 38;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 39;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 40;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 41;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 42;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 43;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 44;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 45;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 46;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 47;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 48;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 50;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 51;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 52;
+					bspush 31;
+					bastore;
+					dup;
+					bspush 53;
+					bspush 13;
+					bastore;
+					dup;
+					bspush 54;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 55;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 56;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 57;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 58;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 59;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 60;
+					bspush 55;
+					bastore;
+					dup;
+					bspush 61;
+					bspush 57;
+					bastore;
+					dup;
+					bspush 62;
+					bspush 54;
+					bastore;
+					dup;
+					bspush 63;
+					bspush 55;
+					bastore;
+					dup;
+					bspush 64;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 65;
+					bspush 56;
+					bastore;
+					dup;
+					bspush 66;
+					bspush 55;
+					bastore;
+					putfield_a 24;		// reference prepaid/EMVStaticData.sfi1_maestro
+					aload_0;
+					sspush 150;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush -127;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -109;
+					bastore;
+					dup;
+					sconst_3;
+					bspush -112;
+					bastore;
+					dup;
+					sconst_4;
+					bspush -127;
+					bastore;
+					dup;
+					sconst_5;
+					bspush -112;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 47;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 84;
+					bastore;
+					dup;
+					bspush 8;
+					bspush 38;
+					bastore;
+					dup;
+					bspush 9;
+					bspush -77;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 122;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 123;
+					bastore;
+					dup;
+					bspush 12;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 13;
+					bspush -4;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 88;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 123;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 17;
+					bspush -81;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 75;
+					bastore;
+					dup;
+					bspush 19;
+					bspush -45;
+					bastore;
+					dup;
+					bspush 20;
+					bspush -119;
+					bastore;
+					dup;
+					bspush 21;
+					bspush -8;
+					bastore;
+					dup;
+					bspush 22;
+					bspush 48;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 40;
+					bastore;
+					dup;
+					bspush 24;
+					bspush 18;
+					bastore;
+					dup;
+					bspush 25;
+					bspush -38;
+					bastore;
+					dup;
+					bspush 26;
+					bspush -110;
+					bastore;
+					dup;
+					bspush 27;
+					bspush -55;
+					bastore;
+					dup;
+					bspush 28;
+					bspush -19;
+					bastore;
+					dup;
+					bspush 29;
+					bspush -64;
+					bastore;
+					dup;
+					bspush 30;
+					bspush 59;
+					bastore;
+					dup;
+					bspush 31;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 32;
+					bspush -83;
+					bastore;
+					dup;
+					bspush 33;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 34;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 35;
+					bspush 86;
+					bastore;
+					dup;
+					bspush 36;
+					bspush -53;
+					bastore;
+					dup;
+					bspush 37;
+					bspush 106;
+					bastore;
+					dup;
+					bspush 38;
+					bspush -26;
+					bastore;
+					dup;
+					bspush 39;
+					bspush -53;
+					bastore;
+					dup;
+					bspush 40;
+					bspush 33;
+					bastore;
+					dup;
+					bspush 41;
+					bspush -62;
+					bastore;
+					dup;
+					bspush 42;
+					bspush 85;
+					bastore;
+					dup;
+					bspush 43;
+					bspush -9;
+					bastore;
+					dup;
+					bspush 44;
+					bspush -50;
+					bastore;
+					dup;
+					bspush 45;
+					bspush 106;
+					bastore;
+					dup;
+					bspush 46;
+					bspush -8;
+					bastore;
+					dup;
+					bspush 47;
+					bspush 63;
+					bastore;
+					dup;
+					bspush 48;
+					bspush 125;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 15;
+					bastore;
+					dup;
+					bspush 50;
+					bspush 87;
+					bastore;
+					dup;
+					bspush 51;
+					bspush 106;
+					bastore;
+					dup;
+					bspush 52;
+					bspush 61;
+					bastore;
+					dup;
+					bspush 53;
+					bspush -123;
+					bastore;
+					dup;
+					bspush 54;
+					bspush -95;
+					bastore;
+					dup;
+					bspush 55;
+					bspush -3;
+					bastore;
+					dup;
+					bspush 56;
+					bspush -74;
+					bastore;
+					dup;
+					bspush 57;
+					bspush -99;
+					bastore;
+					dup;
+					bspush 58;
+					bspush -70;
+					bastore;
+					dup;
+					bspush 59;
+					bspush -31;
+					bastore;
+					dup;
+					bspush 60;
+					bspush -37;
+					bastore;
+					dup;
+					bspush 61;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 62;
+					bspush -18;
+					bastore;
+					dup;
+					bspush 63;
+					bspush -14;
+					bastore;
+					dup;
+					bspush 64;
+					bspush 79;
+					bastore;
+					dup;
+					bspush 66;
+					bspush -36;
+					bastore;
+					dup;
+					bspush 67;
+					bspush 120;
+					bastore;
+					dup;
+					bspush 68;
+					bspush -40;
+					bastore;
+					dup;
+					bspush 69;
+					bspush 40;
+					bastore;
+					dup;
+					bspush 70;
+					bspush -9;
+					bastore;
+					dup;
+					bspush 71;
+					bspush 65;
+					bastore;
+					dup;
+					bspush 72;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 73;
+					bspush 35;
+					bastore;
+					dup;
+					bspush 74;
+					bspush 126;
+					bastore;
+					dup;
+					bspush 75;
+					bspush -62;
+					bastore;
+					dup;
+					bspush 76;
+					bspush -17;
+					bastore;
+					dup;
+					bspush 77;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 78;
+					bspush 15;
+					bastore;
+					dup;
+					bspush 79;
+					bspush 51;
+					bastore;
+					dup;
+					bspush 80;
+					bspush -64;
+					bastore;
+					dup;
+					bspush 81;
+					bspush -124;
+					bastore;
+					dup;
+					bspush 82;
+					bspush -95;
+					bastore;
+					dup;
+					bspush 83;
+					bspush 34;
+					bastore;
+					dup;
+					bspush 84;
+					bspush -77;
+					bastore;
+					dup;
+					bspush 85;
+					bspush 120;
+					bastore;
+					dup;
+					bspush 86;
+					bspush -19;
+					bastore;
+					dup;
+					bspush 87;
+					bspush 105;
+					bastore;
+					dup;
+					bspush 88;
+					bspush -79;
+					bastore;
+					dup;
+					bspush 89;
+					bspush 72;
+					bastore;
+					dup;
+					bspush 90;
+					bspush 53;
+					bastore;
+					dup;
+					bspush 91;
+					bspush 23;
+					bastore;
+					dup;
+					bspush 92;
+					bspush 81;
+					bastore;
+					dup;
+					bspush 93;
+					bspush 62;
+					bastore;
+					dup;
+					bspush 94;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 95;
+					sconst_5;
+					bastore;
+					dup;
+					bspush 96;
+					bspush -55;
+					bastore;
+					dup;
+					bspush 97;
+					bspush -75;
+					bastore;
+					dup;
+					bspush 98;
+					sconst_5;
+					bastore;
+					dup;
+					bspush 99;
+					bspush 28;
+					bastore;
+					dup;
+					bspush 100;
+					bspush -79;
+					bastore;
+					dup;
+					bspush 101;
+					bspush -50;
+					bastore;
+					dup;
+					bspush 102;
+					bspush 126;
+					bastore;
+					dup;
+					bspush 103;
+					bspush 47;
+					bastore;
+					dup;
+					bspush 104;
+					bspush -20;
+					bastore;
+					dup;
+					bspush 105;
+					bspush 85;
+					bastore;
+					dup;
+					bspush 106;
+					bspush 114;
+					bastore;
+					dup;
+					bspush 107;
+					bspush 23;
+					bastore;
+					dup;
+					bspush 108;
+					bspush -2;
+					bastore;
+					dup;
+					bspush 109;
+					bspush -29;
+					bastore;
+					dup;
+					bspush 110;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 111;
+					bspush -84;
+					bastore;
+					dup;
+					bspush 112;
+					bspush 89;
+					bastore;
+					dup;
+					bspush 113;
+					bspush 62;
+					bastore;
+					dup;
+					bspush 114;
+					bspush -40;
+					bastore;
+					dup;
+					bspush 115;
+					bspush -124;
+					bastore;
+					dup;
+					bspush 116;
+					bspush -58;
+					bastore;
+					dup;
+					bspush 117;
+					bspush 8;
+					bastore;
+					dup;
+					bspush 118;
+					bspush -15;
+					bastore;
+					dup;
+					bspush 119;
+					bspush -46;
+					bastore;
+					dup;
+					bspush 120;
+					bspush 106;
+					bastore;
+					dup;
+					bspush 121;
+					bspush -44;
+					bastore;
+					dup;
+					bspush 122;
+					bspush -96;
+					bastore;
+					dup;
+					bspush 123;
+					bspush 89;
+					bastore;
+					dup;
+					bspush 124;
+					bspush 125;
+					bastore;
+					dup;
+					bspush 125;
+					bspush 58;
+					bastore;
+					dup;
+					bspush 126;
+					bspush -33;
+					bastore;
+					dup;
+					bspush 127;
+					bspush 87;
+					bastore;
+					dup;
+					sspush 128;
+					bspush 40;
+					bastore;
+					dup;
+					sspush 129;
+					bspush 43;
+					bastore;
+					dup;
+					sspush 130;
+					bspush 91;
+					bastore;
+					dup;
+					sspush 131;
+					bspush 24;
+					bastore;
+					dup;
+					sspush 132;
+					bspush -86;
+					bastore;
+					dup;
+					sspush 133;
+					bspush 75;
+					bastore;
+					dup;
+					sspush 134;
+					bspush -2;
+					bastore;
+					dup;
+					sspush 135;
+					bspush 101;
+					bastore;
+					dup;
+					sspush 136;
+					bspush 77;
+					bastore;
+					dup;
+					sspush 137;
+					bspush 91;
+					bastore;
+					dup;
+					sspush 138;
+					bspush 13;
+					bastore;
+					dup;
+					sspush 139;
+					bspush -73;
+					bastore;
+					dup;
+					sspush 140;
+					bspush 98;
+					bastore;
+					dup;
+					sspush 141;
+					bspush 114;
+					bastore;
+					dup;
+					sspush 142;
+					bspush 84;
+					bastore;
+					dup;
+					sspush 143;
+					bspush 23;
+					bastore;
+					dup;
+					sspush 144;
+					bspush -52;
+					bastore;
+					dup;
+					sspush 145;
+					bspush -65;
+					bastore;
+					dup;
+					sspush 146;
+					bspush 90;
+					bastore;
+					dup;
+					sspush 147;
+					bspush 59;
+					bastore;
+					dup;
+					sspush 148;
+					bspush 39;
+					bastore;
+					dup;
+					sspush 149;
+					bspush 56;
+					bastore;
+					putfield_a 25;		// reference prepaid/EMVStaticData.sfi2_maestro
+					aload_0;
+					bspush 67;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 65;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -97;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 50;
+					bastore;
+					dup;
+					sconst_4;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_5;
+					sconst_3;
+					bastore;
+					dup;
+					bspush 6;
+					bspush -110;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 36;
+					bastore;
+					dup;
+					bspush 8;
+					bspush -63;
+					bastore;
+					dup;
+					bspush 9;
+					bspush -41;
+					bastore;
+					dup;
+					bspush 10;
+					bspush -117;
+					bastore;
+					dup;
+					bspush 11;
+					bspush -123;
+					bastore;
+					dup;
+					bspush 12;
+					bspush -5;
+					bastore;
+					dup;
+					bspush 13;
+					bspush -104;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 102;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 61;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 60;
+					bastore;
+					dup;
+					bspush 17;
+					bspush -25;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 63;
+					bastore;
+					dup;
+					bspush 20;
+					bspush -116;
+					bastore;
+					dup;
+					bspush 21;
+					bspush -108;
+					bastore;
+					dup;
+					bspush 22;
+					bspush 120;
+					bastore;
+					dup;
+					bspush 23;
+					bspush -34;
+					bastore;
+					dup;
+					bspush 24;
+					bspush 39;
+					bastore;
+					dup;
+					bspush 25;
+					bspush -57;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 103;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 127;
+					bastore;
+					dup;
+					bspush 28;
+					bspush 69;
+					bastore;
+					dup;
+					bspush 29;
+					bspush 76;
+					bastore;
+					dup;
+					bspush 30;
+					bspush -34;
+					bastore;
+					dup;
+					bspush 31;
+					bspush -35;
+					bastore;
+					dup;
+					bspush 32;
+					bspush -128;
+					bastore;
+					dup;
+					bspush 33;
+					bspush 13;
+					bastore;
+					dup;
+					bspush 34;
+					bspush 109;
+					bastore;
+					dup;
+					bspush 35;
+					bspush 120;
+					bastore;
+					dup;
+					bspush 36;
+					bspush -119;
+					bastore;
+					dup;
+					bspush 37;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 38;
+					bspush 102;
+					bastore;
+					dup;
+					bspush 39;
+					bspush -7;
+					bastore;
+					dup;
+					bspush 40;
+					bspush -26;
+					bastore;
+					dup;
+					bspush 41;
+					bspush 95;
+					bastore;
+					dup;
+					bspush 42;
+					bspush 91;
+					bastore;
+					dup;
+					bspush 43;
+					bspush -113;
+					bastore;
+					dup;
+					bspush 44;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 45;
+					bspush 71;
+					bastore;
+					dup;
+					bspush 46;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 47;
+					sconst_3;
+					bastore;
+					dup;
+					bspush 48;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 72;
+					bastore;
+					dup;
+					bspush 50;
+					bspush 10;
+					bastore;
+					dup;
+					bspush 51;
+					bspush -85;
+					bastore;
+					dup;
+					bspush 52;
+					bspush 82;
+					bastore;
+					dup;
+					bspush 53;
+					bspush -41;
+					bastore;
+					dup;
+					bspush 54;
+					bspush 72;
+					bastore;
+					dup;
+					bspush 55;
+					bspush 106;
+					bastore;
+					dup;
+					bspush 56;
+					bspush 20;
+					bastore;
+					dup;
+					bspush 57;
+					bspush 39;
+					bastore;
+					dup;
+					bspush 58;
+					bspush -77;
+					bastore;
+					dup;
+					bspush 59;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 60;
+					bspush -11;
+					bastore;
+					dup;
+					bspush 61;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 62;
+					bspush 73;
+					bastore;
+					dup;
+					bspush 63;
+					sconst_3;
+					bastore;
+					dup;
+					bspush 64;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 65;
+					bspush 55;
+					bastore;
+					dup;
+					bspush 66;
+					sconst_4;
+					bastore;
+					putfield_a 26;		// reference prepaid/EMVStaticData.sfi3_maestro
+					aload_0;
+					sconst_5;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					sconst_3;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -113;
+					bastore;
+					dup;
+					sconst_3;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_4;
+					sconst_4;
+					bastore;
+					putfield_a 27;		// reference prepaid/EMVStaticData.sfi4_maestro
+					aload_0;
+					sspush 151;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_1;
+					bspush -127;
+					bastore;
+					dup;
+					sconst_2;
+					bspush -108;
+					bastore;
+					dup;
+					sconst_3;
+					bspush -97;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 70;
+					bastore;
+					dup;
+					sconst_5;
+					bspush -127;
+					bastore;
+					dup;
+					bspush 6;
+					bspush -112;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 70;
+					bastore;
+					dup;
+					bspush 8;
+					bspush 78;
+					bastore;
+					dup;
+					bspush 9;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 10;
+					bspush -112;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 124;
+					bastore;
+					dup;
+					bspush 12;
+					bspush -28;
+					bastore;
+					dup;
+					bspush 13;
+					bspush -43;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 42;
+					bastore;
+					dup;
+					bspush 15;
+					bspush -93;
+					bastore;
+					dup;
+					bspush 16;
+					bspush -2;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 51;
+					bastore;
+					dup;
+					bspush 18;
+					bspush -110;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 61;
+					bastore;
+					dup;
+					bspush 20;
+					bspush -90;
+					bastore;
+					dup;
+					bspush 21;
+					bspush -74;
+					bastore;
+					dup;
+					bspush 22;
+					bspush -31;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 121;
+					bastore;
+					dup;
+					bspush 24;
+					bspush -17;
+					bastore;
+					dup;
+					bspush 25;
+					bspush -41;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 86;
+					bastore;
+					dup;
+					bspush 27;
+					bspush -89;
+					bastore;
+					dup;
+					bspush 28;
+					bspush -27;
+					bastore;
+					dup;
+					bspush 29;
+					bspush 20;
+					bastore;
+					dup;
+					bspush 30;
+					bspush -53;
+					bastore;
+					dup;
+					bspush 31;
+					bspush -48;
+					bastore;
+					dup;
+					bspush 32;
+					bspush -7;
+					bastore;
+					dup;
+					bspush 33;
+					bspush -78;
+					bastore;
+					dup;
+					bspush 34;
+					bspush -50;
+					bastore;
+					dup;
+					bspush 35;
+					bspush -29;
+					bastore;
+					dup;
+					bspush 36;
+					bspush -99;
+					bastore;
+					dup;
+					bspush 37;
+					bspush -119;
+					bastore;
+					dup;
+					bspush 38;
+					bspush -103;
+					bastore;
+					dup;
+					bspush 39;
+					bspush 12;
+					bastore;
+					dup;
+					bspush 40;
+					bspush 127;
+					bastore;
+					dup;
+					bspush 41;
+					bspush -78;
+					bastore;
+					dup;
+					bspush 42;
+					bspush 49;
+					bastore;
+					dup;
+					bspush 43;
+					bspush -58;
+					bastore;
+					dup;
+					bspush 44;
+					bspush -22;
+					bastore;
+					dup;
+					bspush 45;
+					bspush -65;
+					bastore;
+					dup;
+					bspush 46;
+					bspush 35;
+					bastore;
+					dup;
+					bspush 47;
+					bspush -54;
+					bastore;
+					dup;
+					bspush 48;
+					bspush -38;
+					bastore;
+					dup;
+					bspush 49;
+					bspush -59;
+					bastore;
+					dup;
+					bspush 51;
+					bspush -114;
+					bastore;
+					dup;
+					bspush 52;
+					bspush -69;
+					bastore;
+					dup;
+					bspush 53;
+					bspush -108;
+					bastore;
+					dup;
+					bspush 54;
+					bspush -54;
+					bastore;
+					dup;
+					bspush 55;
+					bspush -8;
+					bastore;
+					dup;
+					bspush 56;
+					bspush 21;
+					bastore;
+					dup;
+					bspush 57;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 58;
+					bspush 69;
+					bastore;
+					dup;
+					bspush 59;
+					bspush 16;
+					bastore;
+					dup;
+					bspush 60;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 61;
+					bspush -102;
+					bastore;
+					dup;
+					bspush 62;
+					bspush 118;
+					bastore;
+					dup;
+					bspush 63;
+					bspush 118;
+					bastore;
+					dup;
+					bspush 64;
+					bspush -76;
+					bastore;
+					dup;
+					bspush 65;
+					bspush 60;
+					bastore;
+					dup;
+					bspush 66;
+					bspush 78;
+					bastore;
+					dup;
+					bspush 67;
+					bspush 93;
+					bastore;
+					dup;
+					bspush 68;
+					bspush -61;
+					bastore;
+					dup;
+					bspush 69;
+					bspush 57;
+					bastore;
+					dup;
+					bspush 70;
+					bspush -70;
+					bastore;
+					dup;
+					bspush 71;
+					bspush 55;
+					bastore;
+					dup;
+					bspush 72;
+					bspush -21;
+					bastore;
+					dup;
+					bspush 73;
+					sconst_4;
+					bastore;
+					dup;
+					bspush 74;
+					bspush -42;
+					bastore;
+					dup;
+					bspush 75;
+					bspush -23;
+					bastore;
+					dup;
+					bspush 76;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 77;
+					bspush 33;
+					bastore;
+					dup;
+					bspush 78;
+					bspush -64;
+					bastore;
+					dup;
+					bspush 79;
+					bspush 62;
+					bastore;
+					dup;
+					bspush 80;
+					bspush 52;
+					bastore;
+					dup;
+					bspush 81;
+					bspush 121;
+					bastore;
+					dup;
+					bspush 82;
+					bspush -111;
+					bastore;
+					dup;
+					bspush 83;
+					bspush 112;
+					bastore;
+					dup;
+					bspush 84;
+					sconst_m1;
+					bastore;
+					dup;
+					bspush 85;
+					bspush 82;
+					bastore;
+					dup;
+					bspush 86;
+					bspush -95;
+					bastore;
+					dup;
+					bspush 87;
+					bspush 36;
+					bastore;
+					dup;
+					bspush 88;
+					bspush -74;
+					bastore;
+					dup;
+					bspush 89;
+					bspush -19;
+					bastore;
+					dup;
+					bspush 90;
+					bspush 87;
+					bastore;
+					dup;
+					bspush 91;
+					bspush -73;
+					bastore;
+					dup;
+					bspush 92;
+					bspush -33;
+					bastore;
+					dup;
+					bspush 93;
+					bspush -97;
+					bastore;
+					dup;
+					bspush 94;
+					bspush 27;
+					bastore;
+					dup;
+					bspush 95;
+					bspush -99;
+					bastore;
+					dup;
+					bspush 96;
+					bspush -70;
+					bastore;
+					dup;
+					bspush 97;
+					bspush 43;
+					bastore;
+					dup;
+					bspush 98;
+					bspush 96;
+					bastore;
+					dup;
+					bspush 99;
+					bspush 37;
+					bastore;
+					dup;
+					bspush 100;
+					bspush 86;
+					bastore;
+					dup;
+					bspush 101;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 102;
+					bspush 109;
+					bastore;
+					dup;
+					bspush 103;
+					bspush -80;
+					bastore;
+					dup;
+					bspush 104;
+					bspush 24;
+					bastore;
+					dup;
+					bspush 105;
+					bspush -75;
+					bastore;
+					dup;
+					bspush 106;
+					bspush -46;
+					bastore;
+					dup;
+					bspush 107;
+					bspush -67;
+					bastore;
+					dup;
+					bspush 108;
+					sconst_1;
+					bastore;
+					dup;
+					bspush 109;
+					bspush -35;
+					bastore;
+					dup;
+					bspush 110;
+					bspush 103;
+					bastore;
+					dup;
+					bspush 111;
+					bspush 60;
+					bastore;
+					dup;
+					bspush 112;
+					bspush -108;
+					bastore;
+					dup;
+					bspush 113;
+					bspush 85;
+					bastore;
+					dup;
+					bspush 114;
+					bspush 69;
+					bastore;
+					dup;
+					bspush 115;
+					bspush 27;
+					bastore;
+					dup;
+					bspush 116;
+					bspush 62;
+					bastore;
+					dup;
+					bspush 117;
+					bspush -128;
+					bastore;
+					dup;
+					bspush 118;
+					bspush 27;
+					bastore;
+					dup;
+					bspush 119;
+					bspush 53;
+					bastore;
+					dup;
+					bspush 120;
+					bspush 52;
+					bastore;
+					dup;
+					bspush 122;
+					bspush -111;
+					bastore;
+					dup;
+					bspush 123;
+					bspush -14;
+					bastore;
+					dup;
+					bspush 124;
+					bspush 15;
+					bastore;
+					dup;
+					bspush 125;
+					bspush -37;
+					bastore;
+					dup;
+					bspush 126;
+					bspush 89;
+					bastore;
+					dup;
+					bspush 127;
+					bspush -24;
+					bastore;
+					dup;
+					sspush 128;
+					bspush -94;
+					bastore;
+					dup;
+					sspush 129;
+					bspush 33;
+					bastore;
+					dup;
+					sspush 130;
+					bspush -109;
+					bastore;
+					dup;
+					sspush 131;
+					bspush 53;
+					bastore;
+					dup;
+					sspush 132;
+					bspush 25;
+					bastore;
+					dup;
+					sspush 133;
+					bspush -90;
+					bastore;
+					dup;
+					sspush 134;
+					bspush -35;
+					bastore;
+					dup;
+					sspush 135;
+					bspush 57;
+					bastore;
+					dup;
+					sspush 136;
+					bspush -74;
+					bastore;
+					dup;
+					sspush 137;
+					bspush 77;
+					bastore;
+					dup;
+					sspush 138;
+					bspush -124;
+					bastore;
+					dup;
+					sspush 139;
+					bspush 71;
+					bastore;
+					dup;
+					sspush 140;
+					bspush -68;
+					bastore;
+					dup;
+					sspush 141;
+					bspush 108;
+					bastore;
+					dup;
+					sspush 142;
+					bspush -112;
+					bastore;
+					dup;
+					sspush 143;
+					bspush 23;
+					bastore;
+					dup;
+					sspush 144;
+					sconst_3;
+					bastore;
+					dup;
+					sspush 145;
+					bspush -81;
+					bastore;
+					dup;
+					sspush 146;
+					sconst_2;
+					bastore;
+					dup;
+					sspush 147;
+					bspush 15;
+					bastore;
+					dup;
+					sspush 148;
+					bspush 122;
+					bastore;
+					dup;
+					sspush 149;
+					bspush 25;
+					bastore;
+					dup;
+					sspush 150;
+					bspush -19;
+					bastore;
+					putfield_a 28;		// reference prepaid/EMVStaticData.sfi5_maestro
+					return;
+		}
+
+		.method public getAFL([B)[B 1 {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_1;
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L2;
+				L1:	getfield_a_this 12;		// reference prepaid/EMVStaticData.theAFL_pse
+					areturn;
+				L2:	aload_1;
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L4;
+				L3:	getfield_a_this 13;		// reference prepaid/EMVStaticData.theAFL_maestro
+					areturn;
+				L4:	getfield_a_this 13;		// reference prepaid/EMVStaticData.theAFL_maestro
+					areturn;
+		}
+
+		.method public getAIP([B)S 2 {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_1;
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L2;
+				L1:	sspush 14336;
+					sreturn;
+				L2:	aload_1;
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L4;
+				L3:	sspush 14336;
+					sreturn;
+				L4:	sspush 14336;
+					sreturn;
+		}
+
+		.method public getCDOL1DataLength()S 3 {
+			.stack 1;
+			.locals 0;
+
+				L0:	bspush 43;
+					sreturn;
+		}
+
+		.method public getCDOL2DataLength()S 4 {
+			.stack 1;
+			.locals 0;
+
+				L0:	bspush 29;
+					sreturn;
+		}
+
+		.method public getFCI([B)[B 5 {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_1;
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L2;
+				L1:	getfield_a_this 16;		// reference prepaid/EMVStaticData.fci_pse
+					areturn;
+				L2:	aload_1;
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L4;
+				L3:	getfield_a_this 22;		// reference prepaid/EMVStaticData.fci_maestro
+					areturn;
+				L4:	getfield_a_this 22;		// reference prepaid/EMVStaticData.fci_maestro
+					areturn;
+		}
+
+		.method public getFCILength([B)S 6 {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_1;
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L2;
+				L1:	getfield_a_this 16;		// reference prepaid/EMVStaticData.fci_pse
+					arraylength;
+					sreturn;
+				L2:	aload_1;
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L4;
+				L3:	getfield_a_this 22;		// reference prepaid/EMVStaticData.fci_maestro
+					arraylength;
+					sreturn;
+				L4:	getfield_a_this 22;		// reference prepaid/EMVStaticData.fci_maestro
+					arraylength;
+					sreturn;
+		}
+
+		.method public readRecord(Ljavacard/framework/APDU;[B[B)V 7 {
+			.stack 5;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 37;		// getBuffer()[B
+					astore 4;
+					aload_3;
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					sconst_0;
+					getfield_a_this 14;		// reference prepaid/EMVStaticData.PSE
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L5;
+				L1:	aload 4;
+					sconst_3;
+					baload;
+					bspush 12;
+					if_scmpne L4;
+				L2:	aload 4;
+					sconst_2;
+					baload;
+					sconst_1;
+					if_scmpne L4;
+				L3:	getfield_a_this 17;		// reference prepaid/EMVStaticData.sfi1_pse
+					sconst_0;
+					aload_2;
+					sconst_0;
+					getfield_a_this 17;		// reference prepaid/EMVStaticData.sfi1_pse
+					arraylength;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_2;
+					sconst_1;
+					getfield_a_this 17;		// reference prepaid/EMVStaticData.sfi1_pse
+					arraylength;
+					sconst_2;
+					ssub;
+					s2b;
+					bastore;
+					goto_w L22;
+				L4:	sspush 27266;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+					goto_w L22;
+				L5:	aload_3;
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					sconst_0;
+					getfield_a_this 15;		// reference prepaid/EMVStaticData.AID_MAESTRO
+					arraylength;
+					invokestatic 51;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne_w L22;
+				L6:	aload 4;
+					sconst_3;
+					baload;
+					bspush 12;
+					if_scmpne L9;
+				L7:	aload 4;
+					sconst_2;
+					baload;
+					sconst_1;
+					if_scmpne L9;
+				L8:	getfield_a_this 24;		// reference prepaid/EMVStaticData.sfi1_maestro
+					sconst_0;
+					aload_2;
+					sconst_0;
+					getfield_a_this 24;		// reference prepaid/EMVStaticData.sfi1_maestro
+					arraylength;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_2;
+					sconst_1;
+					getfield_a_this 24;		// reference prepaid/EMVStaticData.sfi1_maestro
+					arraylength;
+					sconst_2;
+					ssub;
+					s2b;
+					bastore;
+					goto_w L22;
+				L9:	aload 4;
+					sconst_3;
+					baload;
+					bspush 12;
+					if_scmpne L12;
+				L10:	aload 4;
+					sconst_2;
+					baload;
+					sconst_2;
+					if_scmpne L12;
+				L11:	getfield_a_this 25;		// reference prepaid/EMVStaticData.sfi2_maestro
+					sconst_0;
+					aload_2;
+					sconst_0;
+					getfield_a_this 25;		// reference prepaid/EMVStaticData.sfi2_maestro
+					arraylength;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_2;
+					sconst_1;
+					getfield_a_this 25;		// reference prepaid/EMVStaticData.sfi2_maestro
+					arraylength;
+					sconst_2;
+					ssub;
+					s2b;
+					bastore;
+					goto_w L22;
+				L12:	aload 4;
+					sconst_3;
+					baload;
+					bspush 12;
+					if_scmpne L15;
+				L13:	aload 4;
+					sconst_2;
+					baload;
+					sconst_3;
+					if_scmpne L15;
+				L14:	getfield_a_this 26;		// reference prepaid/EMVStaticData.sfi3_maestro
+					sconst_0;
+					aload_2;
+					sconst_0;
+					getfield_a_this 26;		// reference prepaid/EMVStaticData.sfi3_maestro
+					arraylength;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_2;
+					sconst_1;
+					getfield_a_this 26;		// reference prepaid/EMVStaticData.sfi3_maestro
+					arraylength;
+					sconst_2;
+					ssub;
+					s2b;
+					bastore;
+					goto L22;
+				L15:	aload 4;
+					sconst_3;
+					baload;
+					bspush 12;
+					if_scmpne L18;
+				L16:	aload 4;
+					sconst_2;
+					baload;
+					sconst_4;
+					if_scmpne L18;
+				L17:	getfield_a_this 27;		// reference prepaid/EMVStaticData.sfi4_maestro
+					sconst_0;
+					aload_2;
+					sconst_0;
+					getfield_a_this 27;		// reference prepaid/EMVStaticData.sfi4_maestro
+					arraylength;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_2;
+					sconst_1;
+					getfield_a_this 27;		// reference prepaid/EMVStaticData.sfi4_maestro
+					arraylength;
+					sconst_2;
+					ssub;
+					s2b;
+					bastore;
+					goto L22;
+				L18:	aload 4;
+					sconst_3;
+					baload;
+					bspush 12;
+					if_scmpne L21;
+				L19:	aload 4;
+					sconst_2;
+					baload;
+					sconst_5;
+					if_scmpne L21;
+				L20:	getfield_a_this 28;		// reference prepaid/EMVStaticData.sfi5_maestro
+					sconst_0;
+					aload_2;
+					sconst_0;
+					getfield_a_this 28;		// reference prepaid/EMVStaticData.sfi5_maestro
+					arraylength;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_2;
+					sconst_1;
+					getfield_a_this 28;		// reference prepaid/EMVStaticData.sfi5_maestro
+					arraylength;
+					sconst_2;
+					ssub;
+					s2b;
+					bastore;
+					goto L22;
+				L21:	sspush 27266;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L22:	return;
+		}
+
+	}
+
+	.class public EMVCrypto 4 extends 0.0 {		// extends java/lang/Object
+
+		.fields {
+			private final SimpleEMVApplet theApplet 0;		// Lprepaid/SimpleEMVApplet;
+			private final byte[] sessionkey 1;		// [B
+			private final 2.10 mk 2;		// Ljavacard/security/DESKey;
+			private final 3.1 desCipher 3;		// Ljavacardx/crypto/Cipher;
+			private final 2.15 desMAC 4;		// Ljavacard/security/Signature;
+			private final 2.10 sk 5;		// Ljavacard/security/DESKey;
+			private final byte[] diversification_data 6;		// [B
+			 byte[] transaction_data 7;		// [B
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			generateFirstACReponse(B[BS[BS[BS[B)V;
+			generateSecondACReponse(B[BS[BS[BS[B)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 1.0 { 		// javacard/framework/ISO7816
+			}
+
+			.interface EMVConstants { 
+			}
+
+		}
+
+		.method public <init>(Lprepaid/SimpleEMVApplet;)V 0 {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 43;		// java/lang/Object.<init>()V
+					aload_0;
+					aload_1;
+					putfield_a 29;		// reference prepaid/EMVCrypto.theApplet
+					aload_0;
+					bspush 8;
+					sconst_2;
+					invokestatic 42;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 30;		// reference prepaid/EMVCrypto.diversification_data
+					aload_0;
+					bspush 16;
+					sconst_2;
+					invokestatic 42;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 31;		// reference prepaid/EMVCrypto.sessionkey
+					aload_0;
+					sspush 256;
+					sconst_2;
+					invokestatic 42;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 32;		// reference prepaid/EMVCrypto.transaction_data
+					aload_0;
+					sconst_3;
+					sconst_0;
+					invokestatic 44;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+					putfield_a 33;		// reference prepaid/EMVCrypto.desCipher
+					aload_0;
+					bspush 6;
+					sconst_0;
+					invokestatic 46;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+					putfield_a 34;		// reference prepaid/EMVCrypto.desMAC
+					aload_0;
+					sconst_3;
+					sspush 128;
+					sconst_0;
+					invokestatic 48;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 49;		// T_CLASSORINTERFACE javacard/security/DESKey
+					putfield_a 35;		// reference prepaid/EMVCrypto.mk
+					getfield_a_this 35;		// reference prepaid/EMVCrypto.mk
+					bspush 16;
+					newarray 11;
+					dup;
+					sconst_0;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_1;
+					sconst_2;
+					bastore;
+					dup;
+					sconst_2;
+					sconst_3;
+					bastore;
+					dup;
+					sconst_3;
+					sconst_4;
+					bastore;
+					dup;
+					sconst_4;
+					sconst_5;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 6;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 7;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 8;
+					bastore;
+					dup;
+					bspush 8;
+					bspush 9;
+					bastore;
+					dup;
+					bspush 9;
+					bspush 16;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 17;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 18;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 19;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 20;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 21;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 22;
+					bastore;
+					sconst_0;
+					invokeinterface 3 49 5;		// javacard/security/DESKey
+					aload_0;
+					sconst_3;
+					sspush 128;
+					sconst_0;
+					invokestatic 48;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 49;		// T_CLASSORINTERFACE javacard/security/DESKey
+					putfield_a 36;		// reference prepaid/EMVCrypto.sk
+					return;
+		}
+
+		.method private setSessionKey()V {
+			.stack 6;
+			.locals 0;
+
+				L0:	getfield_a_this 30;		// reference prepaid/EMVCrypto.diversification_data
+					sconst_0;
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 53;		// getATC()S
+					invokestatic 54;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					getfield_a_this 30;		// reference prepaid/EMVCrypto.diversification_data
+					sconst_2;
+					bspush 6;
+					sconst_0;
+					invokestatic 55;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 33;		// reference prepaid/EMVCrypto.desCipher
+					getfield_a_this 35;		// reference prepaid/EMVCrypto.mk
+					sconst_2;
+					invokevirtual 56;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 30;		// reference prepaid/EMVCrypto.diversification_data
+					sconst_2;
+					bspush -16;
+					bastore;
+					getfield_a_this 33;		// reference prepaid/EMVCrypto.desCipher
+					getfield_a_this 30;		// reference prepaid/EMVCrypto.diversification_data
+					sconst_0;
+					bspush 8;
+					getfield_a_this 31;		// reference prepaid/EMVCrypto.sessionkey
+					sconst_0;
+					invokevirtual 57;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 30;		// reference prepaid/EMVCrypto.diversification_data
+					sconst_2;
+					bspush 15;
+					bastore;
+					getfield_a_this 33;		// reference prepaid/EMVCrypto.desCipher
+					getfield_a_this 30;		// reference prepaid/EMVCrypto.diversification_data
+					sconst_0;
+					bspush 8;
+					getfield_a_this 31;		// reference prepaid/EMVCrypto.sessionkey
+					sconst_0;
+					invokevirtual 57;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 36;		// reference prepaid/EMVCrypto.sk
+					getfield_a_this 31;		// reference prepaid/EMVCrypto.sessionkey
+					sconst_0;
+					invokeinterface 3 49 5;		// javacard/security/DESKey
+					return;
+		}
+
+		.method private computeAC(B[BS[BS[B)V {
+			.stack 6;
+			.locals 0;
+
+				L0:	aload_2;
+					sconst_5;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sconst_0;
+					sload_3;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					aload 6;
+					invokevirtual 59;		// getAIP([B)S
+					invokestatic 54;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					sconst_2;
+					sadd;
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 53;		// getATC()S
+					invokestatic 54;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					sconst_4;
+					sadd;
+					bspush -128;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					sconst_5;
+					sadd;
+					bspush 19;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 6;
+					sadd;
+					bspush -102;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 7;
+					sadd;
+					sconst_3;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 8;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 9;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 10;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 11;
+					sadd;
+					bspush -97;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 12;
+					sadd;
+					bspush 33;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 12;
+					sadd;
+					sconst_3;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 13;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 14;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 15;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 16;
+					sadd;
+					bspush -100;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 17;
+					sadd;
+					sconst_2;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 18;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 19;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 20;
+					sadd;
+					bspush 42;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 21;
+					sadd;
+					sconst_2;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 22;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sload_3;
+					bspush 23;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 34;		// reference prepaid/EMVCrypto.desMAC
+					getfield_a_this 36;		// reference prepaid/EMVCrypto.sk
+					sconst_1;
+					invokevirtual 60;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 34;		// reference prepaid/EMVCrypto.desMAC
+					getfield_a_this 32;		// reference prepaid/EMVCrypto.transaction_data
+					sconst_0;
+					sload_3;
+					bspush 23;
+					sadd;
+					aload 4;
+					sload 5;
+					invokevirtual 61;		// sign([BSS[BS)S
+					pop;
+					return;
+		}
+
+		.method public generateFirstACReponse(B[BS[BS[BS[B)V 1 {
+			.stack 9;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 62;		// prepaid/EMVCrypto.setSessionKey()V
+					aload_0;
+					sload_1;
+					aload_2;
+					sload_3;
+					aload 4;
+					sload 5;
+					aload 6;
+					sload 7;
+					aload 8;
+					invokevirtual 63;		// generateSecondACReponse(B[BS[BS[BS[B)V
+					return;
+		}
+
+		.method public generateSecondACReponse(B[BS[BS[BS[B)V 2 {
+			.stack 7;
+			.locals 0;
+
+				L0:	aload 6;
+					sload 7;
+					bspush -128;
+					bastore;
+					aload 4;
+					ifnonnull L2;
+				L1:	aload 6;
+					sload 7;
+					sconst_1;
+					sadd;
+					bspush 11;
+					bastore;
+					goto L3;
+				L2:	aload 6;
+					sload 7;
+					sconst_1;
+					sadd;
+					bspush 11;
+					sload 5;
+					sadd;
+					s2b;
+					bastore;
+				L3:	aload 6;
+					sload 7;
+					sconst_2;
+					sadd;
+					sload_1;
+					bastore;
+					aload 6;
+					sload 7;
+					sconst_3;
+					sadd;
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 53;		// getATC()S
+					invokestatic 54;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_0;
+					sload_1;
+					aload_2;
+					sload_3;
+					aload 6;
+					sload 7;
+					sconst_5;
+					sadd;
+					aload 8;
+					invokespecial 64;		// prepaid/EMVCrypto.computeAC(B[BS[BS[B)V
+					aload 4;
+					ifnull L5;
+				L4:	aload 4;
+					sconst_0;
+					aload 6;
+					sload 7;
+					bspush 13;
+					sadd;
+					bspush 18;
+					invokestatic 38;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+				L5:	aload 6;
+					sload 7;
+					sconst_1;
+					sadd;
+					bspush 29;
+					bastore;
+					aload 6;
+					sload 7;
+					bspush 13;
+					sadd;
+					bspush 18;
+					sconst_0;
+					invokestatic 55;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					return;
+		}
+
+	}
+
+	.class public SimpleEMVApplet 5 extends 1.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			static 1.9 pin;		// Ljavacard/framework/OwnerPIN;
+			static 2.14 randomData;		// Ljavacard/security/RandomData;
+			static EMVCrypto theCrypto;		// Lprepaid/EMVCrypto;
+			static EMVProtocolState protocolState;		// Lprepaid/EMVProtocolState;
+			static EMVStaticData staticData;		// Lprepaid/EMVStaticData;
+			static final short SW_VERIFICATION_FAILED = 25344;		// S
+			private static byte[] response;		// [B
+			private static byte[] AID_Selected;		// [B
+		}
+
+		.publicMethodTable 7 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+			Select(Ljavacard/framework/APDU;)Z;
+			generateFirstAC(Ljavacard/framework/APDU;[B[B)V;
+			generateSecondAC(Ljavacard/framework/APDU;[B[B)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 1.0 { 		// javacard/framework/ISO7816
+			}
+
+			.interface EMVConstants { 
+			}
+
+		}
+
+		.method private <init>()V {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 65;		// javacard/framework/Applet.<init>()V
+					sspush 256;
+					sconst_2;
+					invokestatic 42;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					new 67;		// javacard/framework/OwnerPIN
+					dup;
+					sconst_3;
+					sconst_2;
+					invokespecial 68;		// javacard/framework/OwnerPIN.<init>(BB)V
+					putstatic_a 69;		// reference prepaid/SimpleEMVApplet.pin
+					getstatic_a 69;		// reference prepaid/SimpleEMVApplet.pin
+					sconst_2;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 18;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 52;
+					bastore;
+					sconst_0;
+					sconst_2;
+					invokevirtual 70;		// update([BSB)V
+					sconst_1;
+					invokestatic 71;		// javacard/security/RandomData.getInstance(B)Ljavacard/security/RandomData;
+					putstatic_a 72;		// reference prepaid/SimpleEMVApplet.randomData
+					new 73;		// prepaid/EMVProtocolState
+					dup;
+					aload_0;
+					invokespecial 74;		// prepaid/EMVProtocolState.<init>(Lprepaid/SimpleEMVApplet;)V
+					putstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					new 75;		// prepaid/EMVStaticData
+					dup;
+					invokespecial 76;		// prepaid/EMVStaticData.<init>()V
+					putstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					new 77;		// prepaid/EMVCrypto
+					dup;
+					aload_0;
+					invokespecial 78;		// prepaid/EMVCrypto.<init>(Lprepaid/SimpleEMVApplet;)V
+					putstatic_a 79;		// reference prepaid/SimpleEMVApplet.theCrypto
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 41;		// initPinTry()V
+					return;
+		}
+
+		.method public Select(Ljavacard/framework/APDU;)Z 8 {
+			.stack 5;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 37;		// getBuffer()[B
+					astore_2;
+					aload_2;
+					sconst_4;
+					baload;
+					sstore_3;
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					ifnonnull L2;
+				L1:	sspush 224;
+					newarray 11;
+					putstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+				L2:	aload_2;
+					sconst_5;
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					sconst_0;
+					sload_3;
+					invokestatic 81;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 82;		// startNewSession()V
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 83;		// setAppSelected()V
+					aload_1;
+					invokevirtual 84;		// setOutgoing()S
+					pop;
+					aload_1;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					invokevirtual 85;		// getFCILength([B)S
+					invokevirtual 86;		// setOutgoingLength(S)V
+					aload_1;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					invokevirtual 87;		// getFCI([B)[B
+					sconst_0;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					invokevirtual 85;		// getFCILength([B)S
+					invokevirtual 88;		// sendBytesLong([BSS)V
+					sconst_1;
+					sreturn;
+		}
+
+		.method public static install([BSB)V 0 {
+			.stack 2;
+			.locals 0;
+
+				L0:	new 89;		// prepaid/SimpleEMVApplet
+					dup;
+					invokespecial 90;		// prepaid/SimpleEMVApplet.<init>()V
+					invokevirtual 91;		// register()V
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 4;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 37;		// getBuffer()[B
+					astore_2;
+					aload_2;
+					sconst_0;
+					baload;
+					sstore_3;
+					aload_2;
+					sconst_1;
+					baload;
+					sstore 4;
+					sload_3;
+					ifeq L3;
+				L1:	sload_3;
+					bspush -128;
+					if_scmpeq L3;
+				L2:	sspush 28160;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	sload 4;
+					slookupswitch L19 13 -126 L5 -124 L6 -120 L7 -92 L4 -88 L9 -82 L12 -78 L8 -54 L10 22 L19 24 L19 30 L19 32 L11 36 L19;
+				L4:	aload_0;
+					aload_1;
+					invokevirtual 92;		// Select(Ljavacard/framework/APDU;)Z
+					pop;
+					goto_w L20;
+				L5:	goto_w L20;
+				L6:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 93;		// prepaid/SimpleEMVApplet.getChallenge(Ljavacard/framework/APDU;[B)V
+					goto L20;
+				L7:	goto L20;
+				L8:	aload_0;
+					aload_1;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					invokespecial 94;		// prepaid/SimpleEMVApplet.readRecord(Ljavacard/framework/APDU;[B[B)V
+					goto L20;
+				L9:	aload_0;
+					aload_1;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					invokespecial 95;		// prepaid/SimpleEMVApplet.getProcessingOptions(Ljavacard/framework/APDU;[B[B)V
+					goto L20;
+				L10:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 96;		// prepaid/SimpleEMVApplet.getData(Ljavacard/framework/APDU;[B)V
+					goto L20;
+				L11:	aload_0;
+					aload_1;
+					invokespecial 97;		// prepaid/SimpleEMVApplet.verify(Ljavacard/framework/APDU;)V
+					goto L20;
+				L12:	aload_2;
+					sconst_4;
+					baload;
+					sspush 255;
+					sand;
+					sstore 5;
+					sload 5;
+					aload_1;
+					invokevirtual 98;		// setIncomingAndReceive()S
+					if_scmpeq L14;
+				L13:	sspush 26368;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L14:	getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 99;		// getFirstACGenerated()B
+					ifne L16;
+				L15:	aload_0;
+					aload_1;
+					aload_2;
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					invokevirtual 100;		// generateFirstAC(Ljavacard/framework/APDU;[B[B)V
+					goto L20;
+				L16:	getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 101;		// getSecondACGenerated()B
+					ifne L18;
+				L17:	aload_0;
+					aload_1;
+					aload_2;
+					getstatic_a 80;		// reference prepaid/SimpleEMVApplet.AID_Selected
+					invokevirtual 102;		// generateSecondAC(Ljavacard/framework/APDU;[B[B)V
+					goto L20;
+				L18:	sspush 27904;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+					goto L20;
+				L19:	sspush 27904;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L20:	return;
+		}
+
+		.method private verify(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 3;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 37;		// getBuffer()[B
+					astore_2;
+					aload_1;
+					invokevirtual 98;		// setIncomingAndReceive()S
+					s2b;
+					sstore_3;
+					aload_2;
+					sconst_3;
+					baload;
+					bspush -128;
+					if_scmpeq L2;
+				L1:	sspush 27392;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	getstatic_a 69;		// reference prepaid/SimpleEMVApplet.pin
+					invokevirtual 103;		// getTriesRemaining()B
+					ifne L4;
+				L3:	sspush 27011;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+					return;
+				L4:	sconst_0;
+					aload_2;
+					sconst_4;
+					baload;
+					invokestatic 104;		// javacard/framework/Util.makeShort(BB)S
+					sstore 4;
+					sload 4;
+					sload_3;
+					if_scmpeq L6;
+				L5:	sspush 26368;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	getstatic_a 69;		// reference prepaid/SimpleEMVApplet.pin
+					aload_2;
+					sconst_5;
+					sload 4;
+					s2b;
+					invokevirtual 105;		// check([BSB)Z
+					ifne L8;
+				L7:	sspush 25344;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L8:	aload_1;
+					sconst_0;
+					sconst_0;
+					invokevirtual 106;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private getChallenge(Ljavacard/framework/APDU;[B)V {
+			.stack 4;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getstatic_a 72;		// reference prepaid/SimpleEMVApplet.randomData
+					aload_2;
+					sconst_0;
+					bspush 8;
+					invokevirtual 107;		// generateData([BSS)V
+					aload_1;
+					sconst_0;
+					bspush 8;
+					invokevirtual 106;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private getData(Ljavacard/framework/APDU;[B)V {
+			.stack 4;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_2;
+					sconst_2;
+					baload;
+					bspush -97;
+					if_scmpne L6;
+				L1:	aload_2;
+					sconst_0;
+					bspush -97;
+					bastore;
+					aload_2;
+					sconst_1;
+					aload_2;
+					sconst_3;
+					baload;
+					bastore;
+					aload_2;
+					sconst_3;
+					baload;
+					slookupswitch L5 4 19 L4 23 L3 54 L2 79 L5;
+				L2:	aload_2;
+					sconst_4;
+					sconst_2;
+					bastore;
+					aload_2;
+					sconst_5;
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 53;		// getATC()S
+					invokestatic 54;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_2;
+					sconst_5;
+					invokevirtual 106;		// setOutgoingAndSend(SS)V
+					goto L6;
+				L3:	aload_2;
+					sconst_4;
+					sconst_1;
+					bastore;
+					aload_2;
+					sconst_5;
+					getstatic_a 69;		// reference prepaid/SimpleEMVApplet.pin
+					invokevirtual 103;		// getTriesRemaining()B
+					bastore;
+					aload_1;
+					sconst_2;
+					sconst_4;
+					invokevirtual 106;		// setOutgoingAndSend(SS)V
+					goto L6;
+				L4:	aload_2;
+					sconst_4;
+					sconst_2;
+					bastore;
+					aload_2;
+					sconst_5;
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 108;		// getLastOnlineATC()S
+					invokestatic 54;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_2;
+					sconst_5;
+					invokevirtual 106;		// setOutgoingAndSend(SS)V
+					goto L6;
+				L5:	sspush 27392;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	return;
+		}
+
+		.method private readRecord(Ljavacard/framework/APDU;[B[B)V {
+			.stack 5;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					aload_1;
+					aload_2;
+					aload_3;
+					invokevirtual 109;		// readRecord(Ljavacard/framework/APDU;[B[B)V
+					aload_1;
+					invokevirtual 84;		// setOutgoing()S
+					pop;
+					aload_1;
+					aload_2;
+					sconst_1;
+					baload;
+					sconst_2;
+					sadd;
+					invokevirtual 86;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					aload_2;
+					sconst_1;
+					baload;
+					sconst_2;
+					sadd;
+					invokevirtual 88;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method private getProcessingOptions(Ljavacard/framework/APDU;[B[B)V {
+			.stack 5;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_2;
+					sconst_0;
+					bspush -128;
+					bastore;
+					aload_2;
+					sconst_1;
+					bspush 6;
+					bastore;
+					aload_2;
+					sconst_2;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					aload_3;
+					invokevirtual 59;		// getAIP([B)S
+					invokestatic 54;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					aload_3;
+					invokevirtual 110;		// getAFL([B)[B
+					sconst_0;
+					aload_2;
+					sconst_4;
+					sconst_4;
+					invokestatic 81;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					aload_1;
+					invokevirtual 84;		// setOutgoing()S
+					pop;
+					aload_1;
+					bspush 8;
+					invokevirtual 86;		// setOutgoingLength(S)V
+					aload_1;
+					aload_2;
+					sconst_0;
+					bspush 8;
+					invokevirtual 88;		// sendBytesLong([BSS)V
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					invokevirtual 111;		// setProcPerformed()V
+					return;
+		}
+
+		.method public generateFirstAC(Ljavacard/framework/APDU;[B[B)V 9 {
+			.stack 9;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_2;
+					sconst_2;
+					baload;
+					sspush 192;
+					sand;
+					s2b;
+					sstore 4;
+					sload 4;
+					bspush -64;
+					if_scmpeq L2;
+				L1:	sload 4;
+					ifne L3;
+				L2:	sspush 27392;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	getstatic_a 79;		// reference prepaid/SimpleEMVApplet.theCrypto
+					sload 4;
+					aload_2;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					invokevirtual 112;		// getCDOL1DataLength()S
+					aconst_null;
+					sconst_0;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_0;
+					aload_3;
+					invokevirtual 113;		// generateFirstACReponse(B[BS[BS[BS[B)V
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					sload 4;
+					invokevirtual 45;		// setFirstACGenerated(B)V
+					aload_1;
+					invokevirtual 84;		// setOutgoing()S
+					pop;
+					aload_1;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_1;
+					baload;
+					sconst_2;
+					sadd;
+					invokevirtual 86;		// setOutgoingLength(S)V
+					aload_1;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_0;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_1;
+					baload;
+					sconst_2;
+					sadd;
+					invokevirtual 88;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method public generateSecondAC(Ljavacard/framework/APDU;[B[B)V 10 {
+			.stack 9;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_2;
+					sconst_2;
+					baload;
+					sspush 192;
+					sand;
+					s2b;
+					sstore 4;
+					sload 4;
+					bspush -64;
+					if_scmpeq L2;
+				L1:	sload 4;
+					bspush -128;
+					if_scmpne L3;
+				L2:	sspush 27392;
+					invokestatic 39;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	getstatic_a 79;		// reference prepaid/SimpleEMVApplet.theCrypto
+					sload 4;
+					aload_2;
+					getstatic_a 58;		// reference prepaid/SimpleEMVApplet.staticData
+					invokevirtual 114;		// getCDOL2DataLength()S
+					aconst_null;
+					sconst_0;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_0;
+					aload_3;
+					invokevirtual 63;		// generateSecondACReponse(B[BS[BS[BS[B)V
+					getstatic_a 52;		// reference prepaid/SimpleEMVApplet.protocolState
+					sload 4;
+					invokevirtual 47;		// setSecondACGenerated(B)V
+					aload_1;
+					invokevirtual 84;		// setOutgoing()S
+					pop;
+					aload_1;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_1;
+					baload;
+					sconst_2;
+					sadd;
+					invokevirtual 86;		// setOutgoingLength(S)V
+					aload_1;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_0;
+					getstatic_a 66;		// reference prepaid/SimpleEMVApplet.response
+					sconst_1;
+					baload;
+					sconst_2;
+					sadd;
+					invokevirtual 88;		// sendBytesLong([BSS)V
+					return;
+		}
+
+	}
+
+}
