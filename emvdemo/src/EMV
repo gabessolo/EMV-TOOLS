@@ -1,0 +1,22 @@
+// 19/09/2015 Chambourcy France
+
+// L'objet de ce projet est d'implémenter une solution technique
+// securisée pour répondre aux besoins de financements des peuples
+// ayant la culture de la tontine.
+
+// A l'aide d'une carte à puce compatible EMV
+// l'utilisateur de ce service pourra recevoir son gain sur la carte à puce 
+// et payer et rétirer de l'argent sur les automates compatibles à la norme EMV
+// c'est à dire tous les automates, lecteurs et distributeurs locaux et internationaux.
+
+// Le service est tourné vers le marché global
+// Le groupe de tontine peut être constitué de personnes qui se connaissent
+// ou non qui habite la même ville ou non et même des personnes qui habitent
+// sur des continents différents.
+
+// La société qui va exploiter ce service se porte garant du respect
+// des cotisations des membres d'un groupe de tontine.
+
+// L'accès au service est réservé aux peuples ayant des entrées régulieres
+// Les membres d'un groupe peuvent participer à plusieurs tontine à condition
+// d'avoir déjà soldé leur précédente dette.

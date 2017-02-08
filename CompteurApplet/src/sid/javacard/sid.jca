@@ -1,0 +1,157 @@
+// converted by version 1.3
+// on Mon Nov 14 23:50:04 CET 2016
+
+.package sid {
+	.aid 0x1:0x2:0x3:0x4:0x5:0x6:0x7:0x8:0x9:0x0;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.3;		//javacard/framework
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+	}
+
+	.applet {
+		0x1:0x2:0x3:0x4:0x5:0x6:0x7:0x8:0x9:0x0:0x1 compteur;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef byte compteur/compteur;
+		// 1
+		staticMethodRef 0.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 2
+		classRef compteur;
+		// 3
+		staticMethodRef compteur/<init>()V;
+		// 4
+		virtualMethodRef 0.3.1()V;		// register()V
+		// 5
+		virtualMethodRef 0.3.3()Z;		// selectingApplet()Z
+		// 6
+		virtualMethodRef 0.10.1()[B;		// getBuffer()[B
+		// 7
+		staticMethodRef 0.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 8
+		virtualMethodRef 0.10.6()S;		// setIncomingAndReceive()S
+		// 9
+		virtualMethodRef 0.10.8(SS)V;		// setOutgoingAndSend(SS)V
+	}
+
+	.class public compteur 0 extends 0.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			private byte compteur 0;		// B
+			private static final byte CLS = -80;		// B
+			private static final byte INC = 0;		// B
+			private static final byte DEC = 1;		// B
+			private static final byte GET = 2;		// B
+			private static final byte INIT = 3;		// B
+		}
+
+		.publicMethodTable 7 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method private <init>()V {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 1;		// javacard/framework/Applet.<init>()V
+					aload_0;
+					sconst_0;
+					putfield_b 0;		// byte sid/compteur.compteur
+					return;
+		}
+
+		.method public static install([BSB)V 0 {
+			.stack 2;
+			.locals 0;
+
+				L0:	new 2;		// sid/compteur
+					dup;
+					invokespecial 3;		// sid/compteur.<init>()V
+					invokevirtual 4;		// register()V
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 3;
+			.locals 3;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_0;
+					invokevirtual 5;		// selectingApplet()Z
+					ifeq L2;
+				L1:	return;
+				L2:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+					aload_2;
+					sconst_0;
+					baload;
+					sstore_3;
+					aload_2;
+					sconst_1;
+					baload;
+					sstore 4;
+					sload_3;
+					bspush -80;
+					if_scmpeq L4;
+				L3:	sspush 28160;
+					invokestatic 7;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	sload 4;
+					stableswitch L9 0 3 L5 L6 L8 L7;
+				L5:	aload_0;
+					dup;
+					getfield_b 0;		// byte sid/compteur.compteur
+					sconst_1;
+					sadd;
+					s2b;
+					putfield_b 0;		// byte sid/compteur.compteur
+					goto L10;
+				L6:	aload_0;
+					dup;
+					getfield_b 0;		// byte sid/compteur.compteur
+					sconst_1;
+					ssub;
+					s2b;
+					putfield_b 0;		// byte sid/compteur.compteur
+					goto L10;
+				L7:	aload_1;
+					invokevirtual 8;		// setIncomingAndReceive()S
+					pop;
+					aload_0;
+					aload_2;
+					sconst_5;
+					baload;
+					putfield_b 0;		// byte sid/compteur.compteur
+					goto L10;
+				L8:	aload_2;
+					sconst_0;
+					getfield_b_this 0;		// byte sid/compteur.compteur
+					bastore;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 9;		// setOutgoingAndSend(SS)V
+					goto L10;
+				L9:	sspush 27904;
+					invokestatic 7;		// javacard/framework/ISOException.throwIt(S)V
+				L10:	return;
+		}
+
+	}
+
+}
